@@ -2,9 +2,9 @@
   <el-container style="height: 100%">
     <el-main style="position: relative;">
       <el-container style="height: 100%">
-        <el-aside>
+        <el-aside width="200px">
           <div>
-            <Draggable tag="ul" :list="basicComponents"
+            <Draggable tag="ul" :list="basicComponents" style="padding-inline-start: 0px;"
                        v-bind="{group:{ name:'people', pull:'clone',put:false},sort:false, ghostClass: 'ghost'}">
               <li class="form-edit-widget-label" v-for="(item, index) in basicComponents" :key="index">
                 <a>
@@ -33,7 +33,7 @@
 
         </el-main>
 
-        <el-aside>
+        <el-aside width="200px">
           <el-form>
             <el-form-item label="测试一">
               <el-input></el-input>
