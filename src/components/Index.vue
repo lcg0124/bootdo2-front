@@ -22,11 +22,11 @@
             <el-header class="btn-bar" style="height: 45px;">
               <slot name="action">
               </slot>
-              <el-button type="text" size="medium" icon="el-icon-upload2" >导入JSON</el-button>
-              <el-button  type="text" size="medium" icon="el-icon-delete" >清空</el-button>
-              <el-button  type="text" size="medium" icon="el-icon-view" >预览</el-button>
-              <el-button   type="text" size="medium" icon="el-icon-tickets" >后端代码</el-button>
-              <el-button  type="text" size="medium" icon="el-icon-document" @click="handleGenerateCode">前端代码</el-button>
+              <el-button type="text" size="medium" icon="el-icon-upload2">导入JSON</el-button>
+              <el-button type="text" size="medium" icon="el-icon-delete">清空</el-button>
+              <el-button type="text" size="medium" icon="el-icon-view">预览</el-button>
+              <el-button type="text" size="medium" icon="el-icon-tickets" @click="handleGenerateBean">后端代码</el-button>
+              <el-button type="text" size="medium" icon="el-icon-document" @click="handleGenerateCode">前端代码</el-button>
             </el-header>
             <el-main style=" padding: 0;
     position: relative;
@@ -65,6 +65,7 @@
   import Draggable from 'vuedraggable';
   import WidgetForm from './WidgetForm'
   import generateCode from './generateCode.js'
+  import ApiGenerator from '../api/api_generator'
 
   export default {
     name: 'HelloWorld',
@@ -111,6 +112,9 @@
         })
         this.drawer = true
       },
+      handleGenerateBean() {
+        ApiGenerator.addUser(this.widgetForm.list)
+      }
     }
   }
 </script>
@@ -141,16 +145,19 @@
     color: #333;
     border: 1px solid #F4F6FC;
   }
+
   .form-edit-widget-label:hover {
     color: #409EFF;
     border: 1px dashed #409EFF;
   }
+
   .form-edit-widget-label > a {
     display: block;
     cursor: move;
     background: #F4F6FC;
     border: 1px solid #F4F6FC;
   }
+
   .form-edit-widget-label > a .icon {
     margin-right: 6px;
     margin-left: 8px;
@@ -158,12 +165,13 @@
     display: inline-block;
     vertical-align: middle;
   }
+
   .form-edit-widget-label > a span {
     display: inline-block;
     vertical-align: middle;
   }
 
-  .btn-bar{
+  .btn-bar {
     height: 45px;
     line-height: 45px;
     font-size: 18px;
