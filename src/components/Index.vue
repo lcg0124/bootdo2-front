@@ -19,8 +19,14 @@
 
           <el-container
             style=" border-left: 1px solid #e0e0e0; border-right: 1px solid #e0e0e0; height: 100% !important;">
-            <el-header>
-              <el-button @click="handleGenerateCode">生成代码</el-button>
+            <el-header class="btn-bar" style="height: 45px;">
+              <slot name="action">
+              </slot>
+              <el-button type="text" size="medium" icon="el-icon-upload2" >导入JSON</el-button>
+              <el-button  type="text" size="medium" icon="el-icon-delete" >清空</el-button>
+              <el-button  type="text" size="medium" icon="el-icon-view" >预览</el-button>
+              <el-button   type="text" size="medium" icon="el-icon-tickets" >后端代码</el-button>
+              <el-button  type="text" size="medium" icon="el-icon-document" @click="handleGenerateCode">前端代码</el-button>
             </el-header>
             <el-main style=" padding: 0;
     position: relative;
@@ -155,6 +161,14 @@
   .form-edit-widget-label > a span {
     display: inline-block;
     vertical-align: middle;
+  }
+
+  .btn-bar{
+    height: 45px;
+    line-height: 45px;
+    font-size: 18px;
+    border-bottom: solid 2px #e4e7ed;
+    text-align: right;
   }
 </style>
 
