@@ -28,7 +28,7 @@ export default {
 
   //增加用户
   addUser:params =>{
-    return API.POST('/api-admin/user',params)
+    return API.POST('/generator/generatorBean',params)
   },
   //修改用户
   editUser:params =>{

@@ -113,7 +113,7 @@
         this.drawer = true
       },
       handleGenerateBean() {
-        ApiGenerator.addUser(this.widgetForm.list)
+        ApiGenerator.addUser(this.widgetForm)
       }
     }
   }
