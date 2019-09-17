@@ -39,12 +39,25 @@
 
         </el-main>
 
-        <el-aside width="200px">
-          <el-form>
-            <el-form-item label="测试一">
-              <el-input></el-input>
-            </el-form-item>
-          </el-form>
+        <el-aside width="260px">
+          <el-container>
+            <!--<el-header height="45px">-->
+            <!--<div class="config-tab" :class="{active: configTab=='widget'}" @click="handleConfigSelect('widget')">字段属性</div>-->
+            <!--<div class="config-tab" :class="{active: configTab=='form'}" @click="handleConfigSelect('form')">表单属性</div>-->
+            <!--</el-header>-->
+            <!--<el-main class="config-content">-->
+            <!--<widget-config v-show="configTab=='widget'" :data="widgetFormSelect"></widget-config>-->
+            <!--<form-config v-show="configTab=='form'" :data="widgetForm.config"></form-config>-->
+            <!--</el-main>-->
+            <el-tabs v-model="activeName">
+              <el-tab-pane label="字段属性" name="first">
+                <widget-config v-show="configTab=='widget'" :data="widgetFormSelect"></widget-config>
+              </el-tab-pane>
+              <el-tab-pane label="表单属性" name="second">
+                <form-config :data="widgetForm"></form-config>
+              </el-tab-pane>
+            </el-tabs>
+          </el-container>
         </el-aside>
       </el-container>
       <el-drawer
@@ -66,16 +79,22 @@
   import WidgetForm from './WidgetForm'
   import generateCode from './generateCode.js'
   import ApiGenerator from '../api/api_generator'
+  import WidgetConfig from './WidgetConfig'
+  import FormConfig from './FormConfig'
 
   export default {
     name: 'HelloWorld',
     components: {
       Draggable,
-      WidgetForm
+      WidgetForm,
+      WidgetConfig,
+      FormConfig
     },
     props: {},
     data() {
       return {
+        configTab: 'widget',
+        widgetFormSelect: null,
         htmlTemplate: '',
         drawer: false,
         direction: 'rtl',
@@ -90,11 +109,9 @@
         resetJson: false,
         widgetForm: {
           list: [],
-          config: {
-            labelWidth: 100,
-            labelPosition: 'right',
-            size: 'small'
-          },
+          labelWidth: 100,
+          labelPosition: 'right',
+          size: 'small'
         },
         widgetFormSelect: null,
       }
@@ -114,7 +131,10 @@
       },
       handleGenerateBean() {
         ApiGenerator.addUser(this.widgetForm)
-      }
+      },
+      handleConfigSelect(value) {
+        this.configTab = value
+      },
     }
   }
 </script>
