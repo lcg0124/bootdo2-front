@@ -67,6 +67,27 @@
         <div id="codeeditor" style="height: 500px; width: 100%;">{{htmlTemplate}}</div>
 
       </el-drawer>
+
+      <!--后端代码-->
+      <el-dialog
+        title="后端代码"
+        :visible.sync="dialogVisible"
+        width="80%"
+        :before-close="handleClose">
+        <el-tabs v-model="activeName" @tab-click="handleClick">
+          <el-tab-pane label="bean" name="first">
+            <!--<CodeEdit :mycode="bean"></CodeEdit>-->
+            <textarea style="width: 100%;min-height: 320px">{{bean}}</textarea>
+          </el-tab-pane>
+          <el-tab-pane label="mapper.xml" name="second">mapper.xml</el-tab-pane>
+          <el-tab-pane label="controller" name="third">controller</el-tab-pane>
+          <el-tab-pane label="service" name="fourth">service</el-tab-pane>
+        </el-tabs>
+        <!--<span slot="footer" class="dialog-footer">-->
+          <!--<el-button @click="dialogVisible = false">取 消</el-button>-->
+          <!--<el-button type="primary" @click="dialogVisible = false">确 定</el-button>-->
+        <!--</span>-->
+      </el-dialog>
     </el-main>
     <el-footer class="bd-footer" height="30px">Powered by <a target="_blank" href="http://bootdo.com">bootdo.com</a>
     </el-footer>
@@ -81,6 +102,7 @@
   import ApiGenerator from '../api/api_generator'
   import WidgetConfig from './WidgetConfig'
   import FormConfig from './FormConfig'
+  import CodeEdit from './CodeEdit'
 
   export default {
     name: 'HelloWorld',
@@ -88,11 +110,13 @@
       Draggable,
       WidgetForm,
       WidgetConfig,
-      FormConfig
+      FormConfig,
+      CodeEdit
     },
     props: {},
     data() {
       return {
+        bean:'bean',
         configTab: 'widget',
         widgetFormSelect: null,
         htmlTemplate: '',
@@ -114,6 +138,7 @@
           size: 'small'
         },
         widgetFormSelect: null,
+        dialogVisible: false
       }
     },
     updated() {
@@ -130,7 +155,11 @@
         this.drawer = true
       },
       handleGenerateBean() {
-        ApiGenerator.addUser(this.widgetForm)
+        let that = this
+        ApiGenerator.addUser(this.widgetForm).then(function (res) {
+          that.bean = res.domain
+          that.dialogVisible = true
+        })
       },
       handleConfigSelect(value) {
         this.configTab = value
