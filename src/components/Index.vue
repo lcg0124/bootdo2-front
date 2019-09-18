@@ -61,10 +61,12 @@
         </el-aside>
       </el-container>
       <el-drawer
-        title="我是标题"
+        title="前端代码"
         :visible.sync="drawer"
         :direction="direction">
-        <div id="codeeditor" style="height: 500px; width: 100%;">{{htmlTemplate}}</div>
+        <div id="codeeditor" style="height: 500px; width: 100%;">
+          <textarea style="width: 100%;height: 100%">{{htmlTemplate}}</textarea>
+        </div>
 
       </el-drawer>
 
@@ -79,13 +81,15 @@
             <!--<CodeEdit :mycode="bean"></CodeEdit>-->
             <textarea style="width: 100%;min-height: 320px">{{bean}}</textarea>
           </el-tab-pane>
-          <el-tab-pane label="mapper.xml" name="second">mapper.xml</el-tab-pane>
-          <el-tab-pane label="controller" name="third">controller</el-tab-pane>
-          <el-tab-pane label="service" name="fourth">service</el-tab-pane>
+          <el-tab-pane label="mapper.xml" name="second">
+            <textarea style="width: 100%;min-height: 320px">{{mapper}}</textarea>
+          </el-tab-pane>
+          <el-tab-pane label="controller" name="third">{{controller}}</el-tab-pane>
+          <el-tab-pane label="service" name="fourth">{{service}}</el-tab-pane>
         </el-tabs>
         <!--<span slot="footer" class="dialog-footer">-->
-          <!--<el-button @click="dialogVisible = false">取 消</el-button>-->
-          <!--<el-button type="primary" @click="dialogVisible = false">确 定</el-button>-->
+        <!--<el-button @click="dialogVisible = false">取 消</el-button>-->
+        <!--<el-button type="primary" @click="dialogVisible = false">确 定</el-button>-->
         <!--</span>-->
       </el-dialog>
     </el-main>
@@ -116,7 +120,10 @@
     props: {},
     data() {
       return {
-        bean:'bean',
+        bean: 'bean',
+        mapper: '',
+        service: '',
+        controller: '',
         configTab: 'widget',
         widgetFormSelect: null,
         htmlTemplate: '',
@@ -158,6 +165,7 @@
         let that = this
         ApiGenerator.addUser(this.widgetForm).then(function (res) {
           that.bean = res.domain
+          that.mapper = res.Mapper
           that.dialogVisible = true
         })
       },
