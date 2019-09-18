@@ -22,7 +22,7 @@
             <el-header class="btn-bar" style="height: 45px;">
               <slot name="action">
               </slot>
-              <el-button type="text" size="medium" icon="el-icon-upload2">导入JSON</el-button>
+              <el-button type="text" size="medium" icon="el-icon-save" @click="saveForm">保存</el-button>
               <el-button type="text" size="medium" icon="el-icon-delete">清空</el-button>
               <el-button type="text" size="medium" icon="el-icon-view">预览</el-button>
               <el-button type="text" size="medium" icon="el-icon-tickets" @click="handleGenerateBean">后端代码</el-button>
@@ -84,7 +84,9 @@
           <el-tab-pane label="mapper.xml" name="second">
             <textarea style="width: 100%;min-height: 320px">{{mapper}}</textarea>
           </el-tab-pane>
-          <el-tab-pane label="controller" name="third">{{controller}}</el-tab-pane>
+          <el-tab-pane label="controller" name="third">
+            <textarea style="width: 100%;min-height: 320px">{{controller}}</textarea>
+          </el-tab-pane>
           <el-tab-pane label="service" name="fourth">{{service}}</el-tab-pane>
         </el-tabs>
         <!--<span slot="footer" class="dialog-footer">-->
@@ -104,6 +106,7 @@
   import WidgetForm from './WidgetForm'
   import generateCode from './generateCode.js'
   import ApiGenerator from '../api/api_generator'
+  import ApiForm from '../api/api_form'
   import WidgetConfig from './WidgetConfig'
   import FormConfig from './FormConfig'
   import CodeEdit from './CodeEdit'
@@ -120,6 +123,7 @@
     props: {},
     data() {
       return {
+        activeName:'first',
         bean: 'bean',
         mapper: '',
         service: '',
@@ -163,15 +167,30 @@
       },
       handleGenerateBean() {
         let that = this
+        if(!this.widgetForm.name){
+          this.$message('请先设置兑现名称');
+          return
+        }
+        if(!this.widgetForm.packagePath){
+          this.$message('请先设置包路径');
+          return
+        }
         ApiGenerator.addUser(this.widgetForm).then(function (res) {
           that.bean = res.domain
           that.mapper = res.Mapper
+          that.controller = res.Controller
           that.dialogVisible = true
         })
       },
       handleConfigSelect(value) {
         this.configTab = value
       },
+      saveForm(){
+        let that = this
+        ApiForm.saveForm(that.widgetForm).then(function (res) {
+          
+        })
+      }
     }
   }
 </script>

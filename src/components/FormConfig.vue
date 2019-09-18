@@ -25,6 +25,11 @@
           </el-form-item>
         </el-collapse-item>
         <el-collapse-item title="后端属性" name="2">
+
+          <el-form-item label="包路径">
+            <el-input v-model="data.packagePath"></el-input>
+          </el-form-item>
+
           <el-form-item label="对象名称">
             <el-input v-model="data.name"></el-input>
           </el-form-item>
