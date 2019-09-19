@@ -1,0 +1,163 @@
+{
+  "id": "1425715",
+  "name": "VisualProgramming",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "可视化编程",
+  "glyphs": [
+    {
+      "icon_id": "700826",
+      "name": "编辑",
+      "font_class": "edit",
+      "unicode": "e63c",
+      "unicode_decimal": 58940
+    },
+    {
+      "icon_id": "741141",
+      "name": "单选框 选中",
+      "font_class": "radio",
+      "unicode": "e60f",
+      "unicode_decimal": 58895
+    },
+    {
+      "icon_id": "1241232",
+      "name": "上传",
+      "font_class": "fileUpload",
+      "unicode": "e610",
+      "unicode_decimal": 58896
+    },
+    {
+      "icon_id": "1766483",
+      "name": "符号-级联选择",
+      "font_class": "cascader",
+      "unicode": "e695",
+      "unicode_decimal": 59029
+    },
+    {
+      "icon_id": "2471358",
+      "name": "富文本框",
+      "font_class": "editor",
+      "unicode": "e66f",
+      "unicode_decimal": 58991
+    },
+    {
+      "icon_id": "2552662",
+      "name": "公共-日期 ",
+      "font_class": "datePicker",
+      "unicode": "e64d",
+      "unicode_decimal": 58957
+    },
+    {
+      "icon_id": "4638853",
+      "name": "开关",
+      "font_class": "switch",
+      "unicode": "e87d",
+      "unicode_decimal": 59517
+    },
+    {
+      "icon_id": "4890377",
+      "name": "分割线",
+      "font_class": "divider",
+      "unicode": "e6e5",
+      "unicode_decimal": 59109
+    },
+    {
+      "icon_id": "4933389",
+      "name": "时间选择器",
+      "font_class": "timePicker",
+      "unicode": "e750",
+      "unicode_decimal": 59216
+    },
+    {
+      "icon_id": "5831265",
+      "name": "文字",
+      "font_class": "text",
+      "unicode": "e643",
+      "unicode_decimal": 58947
+    },
+    {
+      "icon_id": "5878932",
+      "name": "单行文本",
+      "font_class": "input",
+      "unicode": "e604",
+      "unicode_decimal": 58884
+    },
+    {
+      "icon_id": "5879030",
+      "name": "图片",
+      "font_class": "imgUpload",
+      "unicode": "e625",
+      "unicode_decimal": 58917
+    },
+    {
+      "icon_id": "5881147",
+      "name": "多选框",
+      "font_class": "checkbox",
+      "unicode": "e62e",
+      "unicode_decimal": 58926
+    },
+    {
+      "icon_id": "6370581",
+      "name": "评分",
+      "font_class": "rate",
+      "unicode": "e63b",
+      "unicode_decimal": 58939
+    },
+    {
+      "icon_id": "6672631",
+      "name": "两列",
+      "font_class": "grid",
+      "unicode": "e68c",
+      "unicode_decimal": 59020
+    },
+    {
+      "icon_id": "6879701",
+      "name": "滑块-01",
+      "font_class": "slider",
+      "unicode": "e606",
+      "unicode_decimal": 58886
+    },
+    {
+      "icon_id": "7862140",
+      "name": "标签页",
+      "font_class": "tab",
+      "unicode": "e696",
+      "unicode_decimal": 59030
+    },
+    {
+      "icon_id": "8179648",
+      "name": "多行文本",
+      "font_class": "textarea",
+      "unicode": "e661",
+      "unicode_decimal": 58977
+    },
+    {
+      "icon_id": "8826470",
+      "name": "选择框",
+      "font_class": "select",
+      "unicode": "e6a2",
+      "unicode_decimal": 59042
+    },
+    {
+      "icon_id": "10499777",
+      "name": "子表单",
+      "font_class": "childForm",
+      "unicode": "e617",
+      "unicode_decimal": 58903
+    },
+    {
+      "icon_id": "10782642",
+      "name": "计数器",
+      "font_class": "inputNumber",
+      "unicode": "e63e",
+      "unicode_decimal": 58942
+    },
+    {
+      "icon_id": "10782653",
+      "name": "颜色选择器",
+      "font_class": "colorPicker",
+      "unicode": "e63f",
+      "unicode_decimal": 58943
+    }
+  ]
+}
