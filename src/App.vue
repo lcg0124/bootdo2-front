@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="themeDark">
     <div class="bd-header">
       <img class="bd-logo" src="./assets/logo.png">
       <div class="bd-title" @click="handleHome">可视化编程工具</div>
@@ -13,23 +13,25 @@
 </template>
 
 <script>
-
-  export default {
-    name: 'app',
-    methods: {
-      handleHome () {
-        this.$router.push({path: '/'})
+    // 全局引入 IconFont
+    import "./assets/iconfont/iconfont.css"
+    export default {
+      name: 'app',
+      methods: {
+        handleHome () {
+          this.$router.push({path: '/'})
+        }
       }
     }
-  }
 </script>
 
-<style >
+<style>
+  /*default theme*/
   .bd-header {
     height: 50px;
     box-shadow: 0 2px 10px rgba(70, 160, 252, 0.6);
     padding: 0 10px;
-    background-image: linear-gradient(to right, orangered, greenyellow);
+    background: linear-gradient(to right, orangered, greenyellow);
     position: relative;
   }
   .bd-header .bd-logo {
@@ -65,9 +67,48 @@
   .bd-header .bd-link a.ad {
     color: #f5dab1;
   }
-
-  .bd-container {
+/*dark theme*/
+  .themeDark .bd-header {
+    box-shadow: 0 2px 10px rgba(46, 46, 46, 0.8);
+    background: #191919;
+  }
+  .themeDark .bd-header .bd-logo {
+    height: 26px;
+    vertical-align: middle;
+  }
+  .themeDark .bd-header .bd-title {
+    display: inline-block;
+    line-height: 50px;
+    vertical-align: middle;
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: 600;
+    margin-left: 6px;
+    opacity: 1;
+    cursor: pointer;
+  }
+  .themeDark .bd-header .bd-link {
+    height: 50px;
+    float: right;
+    color: #fff;
+  }
+  .themeDark .bd-header .bd-link a {
+    color: #ffffe6;
+    text-decoration: none;
+    font-size: 14px;
+    line-height: 50px;
+    font-weight: 500;
+    margin-left: 15px;
+  }
+  .themeDark .bd-header .bd-link a:hover {
+    opacity: .8;
+  }
+  .themeDark .bd-header .bd-link a.ad {
+    color: #f5dab1;
+  }
+  .themeDark .bd-container {
     height: calc(100% - 50px);
+    background-color: #282c34;
   }
 
   *, :after, :before {

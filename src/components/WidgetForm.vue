@@ -213,7 +213,7 @@ export default {
   }
 }
 </script>
-<style>
+<style scoped>
   .widget-form-container {
     position: absolute;
     top: 0;
@@ -636,5 +636,11 @@ export default {
     list-style: none;
     font-size: 0;
     overflow: hidden;
+  }
+  .themeDark .form-empty{
+    text-align: left;
+    font-size: 14px;
+    line-height: 18px;
+    margin: 5px 13px;
   }
 </style>

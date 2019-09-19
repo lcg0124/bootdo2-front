@@ -4,7 +4,8 @@
       <el-container style="height: 100%">
         <el-aside width="200px">
           <div>
-            <Draggable tag="ul" :list="basicComponents" style="padding-inline-start: 0px;"
+            <div class="vp-widgetTitle">基础表单容器</div>
+            <Draggable tag="ul" :list="basicComponents" class="vp-widgetList"
                        v-bind="{group:{ name:'people', pull:'clone',put:false},sort:false, ghostClass: 'ghost'}">
               <li class="form-edit-widget-label" v-for="(item, index) in basicComponents" :key="index">
                 <a>
@@ -22,7 +23,7 @@
             <el-header class="btn-bar" style="height: 45px;">
               <slot name="action">
               </slot>
-              <el-button type="text" size="medium" icon="el-icon-save" @click="saveForm">保存</el-button>
+              <el-button type="text" size="medium" icon="el-icon-document" @click="saveForm">保存</el-button>
               <el-button type="text" size="medium" icon="el-icon-delete">清空</el-button>
               <el-button type="text" size="medium" icon="el-icon-view">预览</el-button>
               <el-button type="text" size="medium" icon="el-icon-tickets" @click="handleGenerateBean">后端代码</el-button>
@@ -235,8 +236,8 @@
   }
 
   .form-edit-widget-label > a .icon {
-    margin-right: 6px;
-    margin-left: 8px;
+    margin-right: 3px;
+    margin-left: 6px;
     font-size: 14px;
     display: inline-block;
     vertical-align: middle;
@@ -253,6 +254,75 @@
     font-size: 18px;
     border-bottom: solid 2px #e4e7ed;
     text-align: right;
+  }
+  .vp-widgetTitle{
+    padding: 8px 12px;
+    font-family: FZLTZHK--GBK1-0;
+    font-size: 14px;
+    color: #66696D;
+    letter-spacing: 0;
+    line-height: 14px;
+  }
+  .vp-widgetList{
+    padding-inline-start: 0px;
+    margin: 5px auto;
+  }
+  /*Dark theme*/
+  .themeDark .bd-footer {
+    height: 30px;
+    line-height: 30px;
+    border-top: 1px solid #e0e0e0;
+    font-size: 12px;
+    text-align: center;
+    color: cornflowerblue;
+    background: #fafafa;
+    font-weight: 600;
+  }
+
+  .themeDark .form-edit-widget-label {
+    border: 1px solid transparent;
+  }
+
+  .themeDark .form-edit-widget-label:hover {
+    color: #409EFF;
+    border: 1px dashed #409EFF;
+  }
+
+  .themeDark .form-edit-widget-label > a {
+    background: #33383E;
+    border: 1px solid #33383E;
+    color: #ffffe6 !important;
+
+  }
+
+
+  .themeDark .form-edit-widget-label > a span {
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  .themeDark .btn-bar {
+    height: 45px;
+    line-height: 45px;
+    font-size: 18px;
+    border-bottom: solid 2px #e4e7ed;
+    text-align: right;
+  }
+  .themeDark .el-tabs{
+    width: 100%;
+  }
+  .themeDark .el-tabs__item{
+    width: 120px;
+    text-align: center;
+    color: #ffffe6;
+  }
+  .themeDark .el-tabs__item.is-active {
+  }
+  .themeDark .el-button--text {
+    color: #ffffe6;
+  }
+  .themeDark .vp-widgetTitle{
+    color: #ffffe6;
   }
 </style>
 
