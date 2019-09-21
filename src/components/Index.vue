@@ -1,34 +1,43 @@
 <template>
   <el-container style="height: 100%">
-    <el-main style="position: relative;">
-      <el-container style="height: 100%">
-        <el-aside width="200px">
-          <div>
-            <div class="vp-widgetTitle">基础表单容器</div>
-            <Draggable tag="ul" :list="basicComponents" class="vp-widgetList"
-                       v-bind="{group:{ name:'people', pull:'clone',put:false},sort:false, ghostClass: 'ghost'}">
-              <li class="form-edit-widget-label" v-for="(item, index) in basicComponents" :key="index">
-                <a>
-                  <i class="icon iconfont" :class="item.icon"></i>
-                  <span>{{item.name}}</span>
-                </a>
-              </li>
-            </Draggable>
-          </div>
-        </el-aside>
+    <el-main style="position: relative; padding-top:0px">
+      <el-header class="btn-bar" style="height: 40px;">
+        <el-row>
+          <!--<el-breadcrumb separator="/">-->
+            <!--<el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>-->
+            <!--<el-breadcrumb-item><a href="/">活动管理</a></el-breadcrumb-item>-->
+            <!--<el-breadcrumb-item>活动列表</el-breadcrumb-item>-->
+            <!--<el-breadcrumb-item>活动详情</el-breadcrumb-item>-->
+          <!--</el-breadcrumb>-->
+          <el-button type="text" size="medium" icon="el-icon-document" @click="saveForm">保存</el-button>
+          <el-button type="text" size="medium" icon="el-icon-delete">清空</el-button>
+          <el-button type="text" size="medium" icon="el-icon-view">预览</el-button>
+          <el-button type="text" size="medium" icon="el-icon-tickets" @click="handleGenerateBean">后端代码</el-button>
+          <el-button type="text" size="medium" icon="el-icon-document" @click="handleGenerateCode">前端代码</el-button>
+        </el-row>
+      </el-header>
+      <el-container style="height: calc(100% - 40px)" >
+        <el-row class="row-bg">
+          <el-aside width="200px">
+            <div>
+              <div class="vp-widgetTitle">基础表单容器</div>
+              <Draggable tag="ul" :list="basicComponents" class="vp-widgetList"
+                         v-bind="{group:{ name:'people', pull:'clone',put:false},sort:false, ghostClass: 'ghost'}">
+                <li class="form-edit-widget-label" v-for="(item, index) in basicComponents" :key="index">
+                  <a>
+                    <i class="icon iconfont" :class="item.icon"></i>
+                    <span>{{item.name}}</span>
+                  </a>
+                </li>
+              </Draggable>
+            </div>
+          </el-aside>
+        </el-row>
         <el-main :class="{'widget-empty': widgetForm.list.length == 0}">
 
           <el-container
             style=" border-left: 1px solid #e0e0e0; border-right: 1px solid #e0e0e0; height: 100% !important;">
-            <el-header class="btn-bar" style="height: 45px;">
-              <slot name="action">
-              </slot>
-              <el-button type="text" size="medium" icon="el-icon-document" @click="saveForm">保存</el-button>
-              <el-button type="text" size="medium" icon="el-icon-delete">清空</el-button>
-              <el-button type="text" size="medium" icon="el-icon-view">预览</el-button>
-              <el-button type="text" size="medium" icon="el-icon-tickets" @click="handleGenerateBean">后端代码</el-button>
-              <el-button type="text" size="medium" icon="el-icon-document" @click="handleGenerateCode">前端代码</el-button>
-            </el-header>
+
             <el-main style=" padding: 0;
     position: relative;
     background: #fafafa; height: 100%">
@@ -40,17 +49,9 @@
 
         </el-main>
 
-        <el-aside width="260px">
+        <el-aside width="330px">
           <el-container>
-            <!--<el-header height="45px">-->
-            <!--<div class="config-tab" :class="{active: configTab=='widget'}" @click="handleConfigSelect('widget')">字段属性</div>-->
-            <!--<div class="config-tab" :class="{active: configTab=='form'}" @click="handleConfigSelect('form')">表单属性</div>-->
-            <!--</el-header>-->
-            <!--<el-main class="config-content">-->
-            <!--<widget-config v-show="configTab=='widget'" :data="widgetFormSelect"></widget-config>-->
-            <!--<form-config v-show="configTab=='form'" :data="widgetForm.config"></form-config>-->
-            <!--</el-main>-->
-            <el-tabs v-model="activeName">
+            <el-tabs v-model="activeName" style="width: 100%">
               <el-tab-pane label="字段属性" name="first">
                 <widget-config v-show="configTab=='widget'" :data="widgetFormSelect"></widget-config>
               </el-tab-pane>
@@ -124,7 +125,7 @@
     props: {},
     data() {
       return {
-        activeName:'first',
+        activeName: 'first',
         bean: 'bean',
         mapper: '',
         service: '',
@@ -168,11 +169,11 @@
       },
       handleGenerateBean() {
         let that = this
-        if(!this.widgetForm.name){
+        if (!this.widgetForm.name) {
           this.$message('请先设置兑现名称');
           return
         }
-        if(!this.widgetForm.packagePath){
+        if (!this.widgetForm.packagePath) {
           this.$message('请先设置包路径');
           return
         }
@@ -186,10 +187,10 @@
       handleConfigSelect(value) {
         this.configTab = value
       },
-      saveForm(){
+      saveForm() {
         let that = this
         ApiForm.saveForm(that.widgetForm).then(function (res) {
-          
+
         })
       }
     }
@@ -255,18 +256,22 @@
     border-bottom: solid 2px #e4e7ed;
     text-align: right;
   }
-  .vp-widgetTitle{
+
+  .vp-widgetTitle {
     padding: 8px 12px;
     font-family: FZLTZHK--GBK1-0;
     font-size: 14px;
     color: #66696D;
     letter-spacing: 0;
     line-height: 14px;
+    font-weight: bold
   }
-  .vp-widgetList{
+
+  .vp-widgetList {
     padding-inline-start: 0px;
     margin: 5px auto;
   }
+
   /*Dark theme*/
   .themeDark .bd-footer {
     height: 30px;
@@ -308,20 +313,25 @@
     border-bottom: solid 2px #e4e7ed;
     text-align: right;
   }
-  .themeDark .el-tabs{
+
+  .themeDark .el-tabs {
     width: 100%;
   }
-  .themeDark .el-tabs__item{
+
+  .themeDark .el-tabs__item {
     width: 120px;
     text-align: center;
     color: #ffffe6;
   }
+
   .themeDark .el-tabs__item.is-active {
   }
+
   .themeDark .el-button--text {
     color: #ffffe6;
   }
-  .themeDark .vp-widgetTitle{
+
+  .themeDark .vp-widgetTitle {
     color: #ffffe6;
   }
 </style>

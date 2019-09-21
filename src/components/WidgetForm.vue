@@ -1,6 +1,6 @@
 <template>
   <div class="widget-form-container" style="height: 100%">
-    <div v-if="data.list.length == 0" class="form-empty">从左侧拖拽来添加字段</div>
+    <div v-if="data.list.length == 0" class="form-empty"></div>
     <el-form style="height: 100%" :size="data.size" label-suffix=":" :label-position="data.labelPosition" :label-width="data.labelWidth + 'px'">
       
       <draggable class="" 

@@ -1,6 +1,9 @@
 <template>
   <div v-if="show">
-    <el-form label-position="left" size="mini">
+    <el-form label-position="left" size="mini" label-width="70px">
+      <el-form-item label="name">
+        <el-input v-model="data.model"></el-input>
+      </el-form-item>
       <el-form-item label="标题" v-if="data.type!='grid'">
         <el-input v-model="data.name"></el-input>
       </el-form-item>
@@ -299,9 +302,7 @@
 
       <template v-if="data.type != 'grid'">
         
-        <el-form-item label="数据绑定Key">
-          <el-input v-model="data.model"></el-input>
-        </el-form-item>
+
         <el-form-item label="操作属性">
           <el-checkbox v-model="data.options.readonly" v-if="Object.keys(data.options).indexOf('readonly')>=0">完全只读</el-checkbox>
           <el-checkbox v-model="data.options.disabled" v-if="Object.keys(data.options).indexOf('disabled')>=0">禁用	</el-checkbox>

@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="themeDark">
+  <div id="app" class="">
     <div class="bd-header">
       <img class="bd-logo" src="./assets/logo.png">
       <div class="bd-title" @click="handleHome">可视化编程工具</div>
@@ -30,8 +30,8 @@
   .bd-header {
     height: 50px;
     box-shadow: 0 2px 10px rgba(70, 160, 252, 0.6);
-    padding: 0 10px;
-    background: linear-gradient(to right, orangered, greenyellow);
+    padding: 0 40px;
+    background: #40485b;;
     position: relative;
   }
   .bd-header .bd-logo {
@@ -129,5 +129,48 @@
     color: #2c3e50;
     min-height: 100%;
     height: 100%;
+  }
+  .bd-container {
+    height: calc(100% - 50px);
+  }
+
+
+  .el-row {
+    margin-bottom: 20px;
+
+  &
+  :last-child {
+    margin-bottom: 0;
+  }
+
+  }
+  .el-col {
+    border-radius: 4px;
+  }
+
+  .bg-purple-dark {
+    background: #99a9bf;
+  }
+
+  .bg-purple {
+    background: #d3dce6;
+  }
+
+  .bg-purple-light {
+    background: #e5e9f2;
+  }
+
+  .grid-content {
+    border-radius: 4px;
+    min-height: 36px;
+  }
+
+  .row-bg {
+    padding: 10px 0;
+    background-color: #f9fafc;
+  }
+
+  .el-row {
+    margin-bottom: 10px;
   }
 </style>

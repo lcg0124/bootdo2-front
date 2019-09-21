@@ -2,7 +2,7 @@
   <div class="form-config-container">
     <el-form label-position="left" size="mini">
 
-      <el-collapse v-model="activeNames" @change="handleChange">
+      <el-collapse v-model="activeNames" @change="handleChange" >
         <el-collapse-item title="前端属性" name="1">
           <el-form-item label="标签对齐方式">
             <el-radio-group v-model="data.labelPosition">
