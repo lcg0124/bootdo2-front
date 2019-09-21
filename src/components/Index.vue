@@ -4,11 +4,12 @@
       <el-header class="btn-bar" style="height: 40px;">
         <el-row>
           <!--<el-breadcrumb separator="/">-->
-            <!--<el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>-->
-            <!--<el-breadcrumb-item><a href="/">活动管理</a></el-breadcrumb-item>-->
-            <!--<el-breadcrumb-item>活动列表</el-breadcrumb-item>-->
-            <!--<el-breadcrumb-item>活动详情</el-breadcrumb-item>-->
+          <!--<el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>-->
+          <!--<el-breadcrumb-item><a href="/">活动管理</a></el-breadcrumb-item>-->
+          <!--<el-breadcrumb-item>活动列表</el-breadcrumb-item>-->
+          <!--<el-breadcrumb-item>活动详情</el-breadcrumb-item>-->
           <!--</el-breadcrumb>-->
+          <el-button type="text" size="medium" icon="el-icon-back" style="text-align: left">返回对象列表</el-button>
           <el-button type="text" size="medium" icon="el-icon-document" @click="saveForm">保存</el-button>
           <el-button type="text" size="medium" icon="el-icon-delete">清空</el-button>
           <el-button type="text" size="medium" icon="el-icon-view">预览</el-button>
@@ -16,7 +17,7 @@
           <el-button type="text" size="medium" icon="el-icon-document" @click="handleGenerateCode">前端代码</el-button>
         </el-row>
       </el-header>
-      <el-container style="height: calc(100% - 40px)" >
+      <el-container style="height: calc(100% - 40px)">
         <el-row class="row-bg">
           <el-aside width="200px">
             <div>
@@ -49,7 +50,7 @@
 
         </el-main>
 
-        <el-aside width="330px">
+        <el-aside width="280px">
           <el-container>
             <el-tabs v-model="activeName" style="width: 100%">
               <el-tab-pane label="字段属性" name="first">
@@ -148,7 +149,9 @@
           list: [],
           labelWidth: 100,
           labelPosition: 'right',
-          size: 'small'
+          size: 'small',
+          name:'',
+          packagePath:''
         },
         widgetFormSelect: null,
         dialogVisible: false
@@ -192,7 +195,18 @@
         ApiForm.saveForm(that.widgetForm).then(function (res) {
 
         })
+      },
+      get() {
+        let id = this.$route.query.id
+        let that = this
+        ApiForm.get(id).then(function (res) {
+          that.widgetForm = res
+          that.widgetForm.list=[]
+        })
       }
+    },
+    mounted() {
+      this.get()
     }
   }
 </script>

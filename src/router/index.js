@@ -10,7 +10,7 @@ export default new Router({
   routes: [
     {
       path: '/edit',
-      name: 'Index',
+      name: 'Edit',
       component: Index
     },
     {

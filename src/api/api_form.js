@@ -5,6 +5,9 @@
 import * as API from './'
 
 export default {
+  get:id=>{
+    return API.GET('/form/'+id,{})
+  },
   list: params => {
     return API.GET('/form', params)
   },
