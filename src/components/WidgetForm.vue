@@ -2,9 +2,9 @@
   <div class="widget-form-container" style="height: 100%">
     <div v-if="data.list.length == 0" class="form-empty"></div>
     <el-form style="height: 100%" :size="data.size" label-suffix=":" :label-position="data.labelPosition" :label-width="data.labelWidth + 'px'">
-      
-      <draggable class="" 
-        v-model="data.list" 
+
+      <draggable class=""
+        v-model="data.list"
         v-bind="{group:'people', ghostClass: 'ghost',animation: 200, handle: '.drag-widget'}"
         @end="handleMoveEnd"
         @add="handleWidgetAdd"
@@ -13,7 +13,7 @@
         <transition-group name="fade" tag="div" class="widget-form-list">
           <template v-for="(element, index) in data.list">
             <template v-if="element.type == 'grid'">
-                <el-row class="widget-col widget-view" v-if="element && element.key" :key="element.key" 
+                <el-row class="widget-col widget-view" v-if="element && element.key" :key="element.key"
                   type="flex"
                   :class="{active: selectWidget.key == element.key}"
                   :gutter="element.options.gutter ? element.options.gutter : 0"
@@ -21,7 +21,7 @@
                   :align="element.options.align"
                   @click.native="handleSelectWidget(index)">
                   <el-col  v-for="(col, colIndex) in element.columns" :key="colIndex" :span="col.span ? col.span : 0">
-                    
+
                       <draggable
                         v-model="col.list"
                         :no-transition-on-drag="true"
@@ -30,21 +30,21 @@
                         @add="handleWidgetColAdd($event, element, colIndex)"
                       >
                         <transition-group name="fade" tag="div" class="widget-col-list">
-                          <widget-form-item 
+                          <widget-form-item
                             v-for="(el, i) in col.list"
                             :key="el.key"
                             v-if="el.key"
-                            :element="el" 
-                            :select.sync="selectWidget" 
-                            :index="i" 
+                            :element="el"
+                            :select.sync="selectWidget"
+                            :index="i"
                             :data="col">
                           </widget-form-item>
                         </transition-group>
-                        
+
                       </draggable>
                   </el-col>
                   <div class="widget-view-action widget-col-action" v-if="selectWidget.key == element.key">
-        
+
                     <i class="iconfont icon-trash" @click.stop="handleWidgetDelete(index)"></i>
                   </div>
 
@@ -101,7 +101,7 @@ export default {
       const newIndex = evt.newIndex
       const to = evt.to
       console.log(to)
-      
+
       //为拖拽到容器的元素添加唯一 key
       const key = Date.parse(new Date()) + '_' + Math.ceil(Math.random() * 99999)
       this.$set(this.data.list, newIndex, {
@@ -260,7 +260,7 @@ export default {
     bottom: 0;
     height: 28px;
     line-height: 28px;
-    background: #409EFF;
+    background: #40485b;
     z-index: 9;
   }
   .widget-form-container .widget-form-list .widget-view .widget-view-action i {
@@ -276,7 +276,7 @@ export default {
     bottom: -18px;
     height: 28px;
     line-height: 28px;
-    background: #409EFF;
+    background: #40485b;
     z-index: 9;
   }
   .widget-form-container .widget-form-list .widget-view .widget-view-drag i {
@@ -295,20 +295,20 @@ export default {
   }
   .widget-form-container .widget-form-list .widget-view:hover {
     background: #ECF5FF;
-    outline: 1px solid #409EFF;
+    outline: 1px solid #40485b;
     outline-offset: 0px;
   }
   .widget-form-container .widget-form-list .widget-view:hover.active {
-    outline: 2px solid #409EFF;
-    border: 1px solid #409EFF;
+    outline: 2px solid #40485b;
+    border: 1px solid #40485b;
     outline-offset: 0;
   }
   .widget-form-container .widget-form-list .widget-view:hover .widget-view-drag {
     display: block;
   }
   .widget-form-container .widget-form-list .widget-view.active {
-    outline: 2px solid #409EFF;
-    border: 1px solid #409EFF;
+    outline: 2px solid #40485b;
+    border: 1px solid #40485b;
   }
   .widget-form-container .widget-form-list .widget-view.ghost {
     background: #F56C6C;
@@ -371,7 +371,7 @@ export default {
     bottom: 0;
     height: 28px;
     line-height: 28px;
-    background: #409EFF;
+    background: #40485b;
     z-index: 9;
   }
   .widget-form-container .widget-form-list .widget-table .widget-table-wrapper .widget-table-view .widget-view-action i {
@@ -387,7 +387,7 @@ export default {
     bottom: -18px;
     height: 28px;
     line-height: 28px;
-    background: #409EFF;
+    background: #40485b;
     z-index: 9;
   }
   .widget-form-container .widget-form-list .widget-table .widget-table-wrapper .widget-table-view .widget-view-drag i {
@@ -410,20 +410,20 @@ export default {
   }
   .widget-form-container .widget-form-list .widget-table .widget-table-wrapper .widget-table-view:hover {
     background: #ECF5FF;
-    outline: 1px solid #409EFF;
+    outline: 1px solid #40485b;
     outline-offset: -1px;
   }
   .widget-form-container .widget-form-list .widget-table .widget-table-wrapper .widget-table-view:hover.active {
-    border: 1px solid #409EFF;
-    outline: 1px solid #409EFF;
+    border: 1px solid #40485b;
+    outline: 1px solid #40485b;
     outline-offset: -1px;
   }
   .widget-form-container .widget-form-list .widget-table .widget-table-wrapper .widget-table-view:hover .widget-view-drag {
     display: block;
   }
   .widget-form-container .widget-form-list .widget-table .widget-table-wrapper .widget-table-view.active {
-    outline: 1px solid #409EFF;
-    border: 1px solid #409EFF;
+    outline: 1px solid #40485b;
+    border: 1px solid #40485b;
     outline-offset: -1px;
   }
   .widget-form-container .widget-form-list .widget-table .widget-table-wrapper .widget-table-view.ghost {
@@ -609,7 +609,7 @@ export default {
     margin: 0 !important;
   }
   .widget-form-container .widget-grid.active {
-    border-left: 5px solid #409EFF;
+    border-left: 5px solid #40485b;
     background: #b3d8ff;
   }
   .widget-form-container .widget-grid-container.ghost {

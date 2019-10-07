@@ -1,12 +1,12 @@
 <template>
   <el-form-item  style="height: 100%" class="widget-view "
-      v-if="element && element.key" 
+      v-if="element && element.key"
       :class="{active: selectWidget.key == element.key, 'is_req': element.options.required}"
       :label="element.name"
       @click.native.stop="handleSelectWidget(index)"
     >
         <template v-if="element.type == 'input'">
-          <el-input 
+          <el-input
             v-model="element.options.defaultValue"
             :style="{width: element.options.width}"
             :placeholder="element.options.placeholder"
@@ -24,8 +24,8 @@
         </template>
 
         <template v-if="element.type == 'number'">
-          <el-input-number 
-            v-model="element.options.defaultValue" 
+          <el-input-number
+            v-model="element.options.defaultValue"
             :disabled="element.options.disabled"
             :controls-position="element.options.controlsPosition"
             :style="{width: element.options.width}"
@@ -37,10 +37,10 @@
             :style="{width: element.options.width}"
             :disabled="element.options.disabled"
           >
-            <el-radio  
+            <el-radio
               :style="{display: element.options.inline ? 'inline-block' : 'block'}"
               :label="item.value" v-for="(item, index) in element.options.options" :key="item.value + index"
-              
+
             >
               {{element.options.showLabel ? item.label : item.value}}
             </el-radio>
@@ -62,7 +62,7 @@
         </template>
 
         <template v-if="element.type == 'time'">
-          <el-time-picker 
+          <el-time-picker
             v-model="element.options.defaultValue"
             :is-range="element.options.isRange"
             :placeholder="element.options.placeholder"
@@ -90,7 +90,7 @@
             :disabled="element.options.disabled"
             :editable="element.options.editable"
             :clearable="element.options.clearable"
-            :style="{width: element.options.width}"  
+            :style="{width: element.options.width}"
           >
           </el-date-picker>
         </template>
@@ -104,7 +104,7 @@
         </template>
 
         <template v-if="element.type == 'color'">
-          <el-color-picker 
+          <el-color-picker
             v-model="element.options.defaultValue"
             :disabled="element.options.disabled"
             :show-alpha="element.options.showAlpha"
@@ -133,7 +133,7 @@
         </template>
 
         <template v-if="element.type=='slider'">
-          <el-slider 
+          <el-slider
             v-model="element.options.defaultValue"
             :min="element.options.min"
             :max="element.options.max"
@@ -194,7 +194,7 @@
         <div class="widget-view-drag" v-if="selectWidget.key == element.key">
           <i class="iconfont icon-drag drag-widget"></i>
         </div>
-        
+
     </el-form-item>
 </template>
 
@@ -213,7 +213,7 @@ export default {
     }
   },
   mounted () {
-    
+
   },
   methods: {
     handleSelectWidget (index) {
@@ -303,7 +303,7 @@ export default {
   bottom: 0;
   height: 28px;
   line-height: 28px;
-  background: #409EFF;
+  background: #40485b;
   z-index: 9;
   }
   .widget-view .widget-view-action i {
@@ -319,7 +319,7 @@ export default {
   bottom: -18px;
   height: 28px;
   line-height: 28px;
-  background: #409EFF;
+  background: #40485b;
   z-index: 9;
   }
   .widget-view .widget-view-drag i {
@@ -338,20 +338,20 @@ export default {
   }
   .widget-view:hover {
   background: #ECF5FF;
-  outline: 1px solid #409EFF;
+  outline: 1px solid #40485b;
   outline-offset: 0px;
   }
   .widget-view:hover.active {
-  outline: 2px solid #409EFF;
-  border: 1px solid #409EFF;
+  outline: 2px solid #40485b;
+  border: 1px solid #40485b;
   outline-offset: 0;
   }
   .widget-view:hover .widget-view-drag {
   display: block;
   }
   .widget-view.active {
-  outline: 2px solid #409EFF;
-  border: 1px solid #409EFF;
+  outline: 2px solid #40485b;
+  border: 1px solid #40485b;
   }
   .widget-view.ghost {
   background: #F56C6C;

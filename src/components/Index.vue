@@ -3,37 +3,47 @@
     <el-main style="position: relative; padding-top:0px">
       <el-header class="btn-bar" style="height: 40px;">
         <el-row>
-          <!--<el-breadcrumb separator="/">-->
-          <!--<el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>-->
-          <!--<el-breadcrumb-item><a href="/">活动管理</a></el-breadcrumb-item>-->
-          <!--<el-breadcrumb-item>活动列表</el-breadcrumb-item>-->
-          <!--<el-breadcrumb-item>活动详情</el-breadcrumb-item>-->
-          <!--</el-breadcrumb>-->
-          <el-button type="text" size="medium" icon="el-icon-back" style="text-align: left">返回对象列表</el-button>
-          <el-button type="text" size="medium" icon="el-icon-document" @click="saveForm">保存</el-button>
+          <el-button type="text" size="medium" icon="el-icon-back" style="text-align: left" @click="goList">返回对象列表
+          </el-button>
+          <el-button type="info" size="mini" icon="el-icon-document" @click="saveForm">保存</el-button>
           <el-button type="text" size="medium" icon="el-icon-delete">清空</el-button>
-          <el-button type="text" size="medium" icon="el-icon-view">预览</el-button>
+          <el-button type="text" size="medium" icon="el-icon-view" @click="createPreview">预览</el-button>
           <el-button type="text" size="medium" icon="el-icon-tickets" @click="handleGenerateBean">后端代码</el-button>
           <el-button type="text" size="medium" icon="el-icon-document" @click="handleGenerateCode">前端代码</el-button>
         </el-row>
       </el-header>
       <el-container style="height: calc(100% - 40px)">
-        <el-row class="row-bg">
-          <el-aside width="200px">
-            <div>
-              <div class="vp-widgetTitle">基础表单容器</div>
+        <el-aside width="200px">
+          <el-menu background-color="#545c64"
+                   text-color="#fff"
+                   active-text-color="#ffd04b">
+            <el-submenu>
+              <template slot="title">
+                表单
+              </template>
               <Draggable tag="ul" :list="basicComponents" class="vp-widgetList"
                          v-bind="{group:{ name:'people', pull:'clone',put:false},sort:false, ghostClass: 'ghost'}">
-                <li class="form-edit-widget-label" v-for="(item, index) in basicComponents" :key="index">
-                  <a>
-                    <i class="icon iconfont" :class="item.icon"></i>
-                    <span>{{item.name}}</span>
-                  </a>
-                </li>
+                <el-menu-item v-for="(item, index) in basicComponents" :key="index">{{item.name}}</el-menu-item>
               </Draggable>
-            </div>
-          </el-aside>
-        </el-row>
+            </el-submenu>
+          </el-menu>
+          <!--<el-collapse accordion>-->
+          <!--<el-collapse-item>-->
+          <!--<template slot="title">-->
+          <!--<div class="vp-widgetTitle">基础表单容器</div>-->
+          <!--</template>-->
+          <!--<Draggable tag="ul" :list="basicComponents" class="vp-widgetList"-->
+          <!--v-bind="{group:{ name:'people', pull:'clone',put:false},sort:false, ghostClass: 'ghost'}">-->
+          <!--<li class="form-edit-widget-label" v-for="(item, index) in basicComponents" :key="index">-->
+          <!--<a>-->
+          <!--<i class="icon iconfont" :class="item.icon"></i>-->
+          <!--<span>{{item.name}}</span>-->
+          <!--</a>-->
+          <!--</li>-->
+          <!--</Draggable>-->
+          <!--</el-collapse-item>-->
+          <!--</el-collapse>-->
+        </el-aside>
         <el-main :class="{'widget-empty': widgetForm.list.length == 0}">
 
           <el-container
@@ -65,10 +75,11 @@
       </el-container>
       <el-drawer
         title="前端代码"
-        :visible.sync="drawer"
+        :visible.sync="drawer" size="80%"
         :direction="direction">
-        <div id="codeeditor" style="height: 500px; width: 100%;">
-          <textarea style="width: 100%;height: 100%">{{htmlTemplate}}</textarea>
+        <div id="codeeditor" style="height: 100%; width: 100%;">
+          <!--<textarea style="width: 100%;height: 100%">{{htmlTemplate}}</textarea>-->
+          <code-edit :code="htmlTemplate"></code-edit>
         </div>
 
       </el-drawer>
@@ -97,6 +108,31 @@
         <!--<el-button type="primary" @click="dialogVisible = false">确 定</el-button>-->
         <!--</span>-->
       </el-dialog>
+      <cus-dialog
+        :visible="previewVisible"
+        @on-close="previewVisible = false"
+        ref="widgetPreview"
+        width="1000px"
+        form
+      >
+        <generate-form insite="true" @on-change="handleDataChange" v-if="previewVisible" :data="widgetForm" :value="widgetModels" :remote="remoteFuncs" ref="generateForm">
+
+          <template v-slot:blank="scope">
+            宽度：<el-input v-model="scope.model.blank.width" style="width: 100px"></el-input>
+            高度：<el-input v-model="scope.model.blank.height" style="width: 100px"></el-input>
+          </template>
+        </generate-form>
+
+        <template slot="action">
+          <el-button type="primary" @click="handleTest">获取数据</el-button>
+          <el-button @click="handleReset">重置</el-button>
+        </template>
+      </cus-dialog>
+
+      <el-dialog>
+
+      </el-dialog>
+
     </el-main>
     <el-footer class="bd-footer" height="30px">Powered by <a target="_blank" href="http://bootdo.com">bootdo.com</a>
     </el-footer>
@@ -113,6 +149,8 @@
   import WidgetConfig from './WidgetConfig'
   import FormConfig from './FormConfig'
   import CodeEdit from './CodeEdit'
+  import CusDialog from './CusDialog'
+  import GenerateForm from './GenerateForm'
 
   export default {
     name: 'HelloWorld',
@@ -121,11 +159,15 @@
       WidgetForm,
       WidgetConfig,
       FormConfig,
-      CodeEdit
+      CodeEdit,
+      CusDialog,
+      GenerateForm
     },
     props: {},
     data() {
       return {
+        widgetModels: {},
+        previewVisible: false,
         activeName: 'first',
         bean: 'bean',
         mapper: '',
@@ -150,8 +192,8 @@
           labelWidth: 100,
           labelPosition: 'right',
           size: 'small',
-          name:'',
-          packagePath:''
+          name: '',
+          packagePath: ''
         },
         widgetFormSelect: null,
         dialogVisible: false
@@ -161,13 +203,16 @@
       console.log(this.list)
     },
     methods: {
+      goList() {
+        this.$router.push({path: '/list'})
+      },
       handleGenerateCode() {
-        this.codeVisible = true
+        // this.codeVisible = true
         this.htmlTemplate = generateCode(JSON.stringify(this.widgetForm))
-        this.$nextTick(() => {
-          const editor = ace.edit('codeeditor')
-          editor.session.setMode("ace/mode/html")
-        })
+        // this.$nextTick(() => {
+        //   const editor = ace.edit('codeeditor')
+        //   editor.session.setMode("ace/mode/html")
+        // })
         this.drawer = true
       },
       handleGenerateBean() {
@@ -201,8 +246,11 @@
         let that = this
         ApiForm.get(id).then(function (res) {
           that.widgetForm = res
-          that.widgetForm.list=[]
+          that.widgetForm.list = []
         })
+      },
+      createPreview() {
+        this.previewVisible = true
       }
     },
     mounted() {
@@ -239,8 +287,8 @@
   }
 
   .form-edit-widget-label:hover {
-    color: #409EFF;
-    border: 1px dashed #409EFF;
+    color: #40485b;
+    border: 1px dashed #40485b;
   }
 
   .form-edit-widget-label > a {
@@ -303,8 +351,8 @@
   }
 
   .themeDark .form-edit-widget-label:hover {
-    color: #409EFF;
-    border: 1px dashed #409EFF;
+    color: #40485b;
+    border: 1px dashed #40485b;
   }
 
   .themeDark .form-edit-widget-label > a {
@@ -313,7 +361,6 @@
     color: #ffffe6 !important;
 
   }
-
 
   .themeDark .form-edit-widget-label > a span {
     display: inline-block;

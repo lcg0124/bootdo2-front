@@ -1,9 +1,11 @@
 <template>
-  <textarea ref="mycode" class="codesql" v-model="code" style="height:200px;width:600px;"></textarea>
+  <textarea ref="mycode" class="codesql" v-model="code" style="height:90%;width:600px;"></textarea>
 </template>
 
 <script>
   import "codemirror/theme/ambiance.css";
+  import "codemirror/theme/darcula.css";
+
   import "codemirror/lib/codemirror.css";
   import "codemirror/addon/hint/show-hint.css";
 
@@ -11,26 +13,24 @@
   require("codemirror/addon/edit/matchbrackets");
   require("codemirror/addon/selection/active-line");
   require("codemirror/mode/sql/sql");
+  require("codemirror/mode/vue/vue");
   require("codemirror/addon/hint/show-hint");
   require("codemirror/addon/hint/sql-hint");
   export default {
     name: "codeMirror",
-    data () {
-      return {
-        code: '//按Ctrl键进行代码提示'
-      }
-    },
+    props:['code'],
+
     mounted () {
-      debugger
-      let mime = 'text/x-mariadb'
-      //let theme = 'ambiance'//设置主题，不设置的会使用默认主题
+      let mime = 'vue'
+      let theme = 'ambiance'//设置主题，不设置的会使用默认主题
       let editor = CodeMirror.fromTextArea(this.$refs.mycode, {
         mode: mime,//选择对应代码编辑器的语言，我这边选的是数据库，根据个人情况自行设置即可
         indentWithTabs: true,
         smartIndent: true,
         lineNumbers: true,
         matchBrackets: true,
-        //theme: theme,
+        htmlMode: true,
+        theme: 'darcula',
         // autofocus: true,
         extraKeys: {'Ctrl': 'autocomplete'},//自定义快捷键
         hintOptions: {//自定义提示选项
@@ -50,8 +50,16 @@
 
 <style>
   .codesql {
-    font-size: 11pt;
+    height: 100%;
+    font-size: 12pt;
     font-family: Consolas, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;
+  }
+
+  .CodeMirror {
+    font-family: monospace;
+    height: 600px;
+    color: black;
+    direction: ltr;
   }
 </style>
 

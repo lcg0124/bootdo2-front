@@ -166,11 +166,31 @@
   }
 
   .row-bg {
-    padding: 10px 0;
+    padding: 10px 10px;
     background-color: #f9fafc;
   }
 
   .el-row {
     margin-bottom: 10px;
   }
+  i-title{
+    font-weight: bold;
+  }
+
+  .el-submenu .el-menu-item {
+    height: 35px;
+    line-height: 35px;
+    padding: 0 45px;
+    min-width: 200px;
+  }
+
+  .el-menu-item, .el-submenu__title {
+    height: 35px;
+    line-height: 35px;
+    position: relative;
+    -webkit-box-sizing: border-box;
+    white-space: nowrap;
+    list-style: none;
+  }
+
 </style>

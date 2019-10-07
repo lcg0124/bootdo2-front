@@ -2,14 +2,14 @@
   <el-container>
     <el-main>
       <el-row class="row-bg">
-        对象列表
+        <spn class="i-title">对象列表</spn>
       </el-row>
       <el-row class="row-bg">
         <el-col :span="6">
           <el-input size="small" v-model="input" placeholder="请输入内容"></el-input>
         </el-col>
         <el-col :span="6">
-          <el-button size="small">新增</el-button>
+          <el-button size="small" @click="goForm">新增</el-button>
         </el-col>
       </el-row>
       <el-row type="flex" class="row-bg">
@@ -60,6 +60,9 @@
     },
 
     methods: {
+      goForm: function(){
+        this.$router.push({path: '/edit'})
+      },
       list: function () {
         let params = {}
         params.key = ''
@@ -70,7 +73,7 @@
       },
       handleEdit(index, row) {
         this.$router.push({
-          name:'Edit',
+          name: 'Edit',
           path: '/edit', query: {
             id: row.id
           }
@@ -82,3 +85,7 @@
     }
   }
 </script>
+
+<style>
+
+</style>
