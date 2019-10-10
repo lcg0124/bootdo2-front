@@ -4,6 +4,9 @@
 
       <el-collapse v-model="activeNames" @change="handleChange" >
         <el-collapse-item title="前端属性" name="1">
+          <template slot="title">
+
+          </template>
           <el-form-item label="标签对齐方式">
             <el-radio-group v-model="data.labelPosition">
               <el-radio-button label="left">左对齐</el-radio-button>

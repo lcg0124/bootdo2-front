@@ -14,14 +14,17 @@
   require("codemirror/addon/selection/active-line");
   require("codemirror/mode/sql/sql");
   require("codemirror/mode/vue/vue");
+  require("codemirror/mode/clike/clike");
   require("codemirror/addon/hint/show-hint");
   require("codemirror/addon/hint/sql-hint");
   export default {
     name: "codeMirror",
-    props:['code'],
-
+    props:['code','imime'],
+    data(){
+      code:this.code
+    },
     mounted () {
-      let mime = 'vue'
+      let mime = this.imime
       let theme = 'ambiance'//设置主题，不设置的会使用默认主题
       let editor = CodeMirror.fromTextArea(this.$refs.mycode, {
         mode: mime,//选择对应代码编辑器的语言，我这边选的是数据库，根据个人情况自行设置即可
@@ -31,7 +34,7 @@
         matchBrackets: true,
         htmlMode: true,
         theme: 'darcula',
-        // autofocus: true,
+        autofocus: true,
         extraKeys: {'Ctrl': 'autocomplete'},//自定义快捷键
         hintOptions: {//自定义提示选项
           tables: {

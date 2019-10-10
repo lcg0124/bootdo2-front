@@ -3,9 +3,11 @@
     <el-main style="position: relative; padding-top:0px">
       <el-header class="btn-bar" style="height: 40px;">
         <el-row>
-          <el-button type="text" size="medium" icon="el-icon-back" style="text-align: left" @click="goList">返回对象列表
+          <el-button type="text" size="medium" icon="el-icon-back" style="text-align: left" @click="goList"
+                     disabled="disabled">返回对象列表
           </el-button>
-          <el-button type="info" size="mini" icon="el-icon-document" @click="saveForm">保存</el-button>
+          <el-button type="text" size="medium" icon="el-icon-document" @click="saveForm" disabled="disabled">保存
+          </el-button>
           <el-button type="text" size="medium" icon="el-icon-delete">清空</el-button>
           <el-button type="text" size="medium" icon="el-icon-view" @click="createPreview">预览</el-button>
           <el-button type="text" size="medium" icon="el-icon-tickets" @click="handleGenerateBean">后端代码</el-button>
@@ -14,16 +16,20 @@
       </el-header>
       <el-container style="height: calc(100% - 40px)">
         <el-aside width="200px">
-          <el-menu background-color="#545c64"
+          <el-menu default-active="00001" background-color="#545c64" default-openeds="00001"
                    text-color="#fff"
                    active-text-color="#ffd04b">
-            <el-submenu>
+            <el-submenu index="00001">
               <template slot="title">
-                表单
+                <i class="el-icon-location"></i>
+                <span>FORM表单</span>
               </template>
               <Draggable tag="ul" :list="basicComponents" class="vp-widgetList"
                          v-bind="{group:{ name:'people', pull:'clone',put:false},sort:false, ghostClass: 'ghost'}">
-                <el-menu-item v-for="(item, index) in basicComponents" :key="index">{{item.name}}</el-menu-item>
+                <el-menu-item v-for="(item, index) in basicComponents" :key="index">
+                  <i class="icon iconfont" :class="item.icon"></i>
+                  <span>{{item.name}}</span>
+                </el-menu-item>
               </Draggable>
             </el-submenu>
           </el-menu>
@@ -73,41 +79,47 @@
           </el-container>
         </el-aside>
       </el-container>
-      <el-drawer
-        title="前端代码"
-        :visible.sync="drawer" size="80%"
-        :direction="direction">
+      <el-drawer style="margin-left: 5px"
+                 title="前端代码"
+                 :visible.sync="drawer" size="80%"
+                 :direction="direction">
         <div id="codeeditor" style="height: 100%; width: 100%;">
           <!--<textarea style="width: 100%;height: 100%">{{htmlTemplate}}</textarea>-->
-          <code-edit :code="htmlTemplate"></code-edit>
+          <code-edit :code="htmlTemplate" imime="vue"></code-edit>
         </div>
 
       </el-drawer>
 
       <!--后端代码-->
-      <el-dialog
+      <el-drawer
         title="后端代码"
         :visible.sync="dialogVisible"
-        width="80%"
+        size="80%"
         :before-close="handleClose">
-        <el-tabs v-model="activeName" @tab-click="handleClick">
+        <el-tabs v-model="activeName" @tab-click="handleClick" style="margin-left: 5px" :stretch=false>
           <el-tab-pane label="bean" name="first">
             <!--<CodeEdit :mycode="bean"></CodeEdit>-->
-            <textarea style="width: 100%;min-height: 320px">{{bean}}</textarea>
+            <code-edit :code="bean" imime="text/x-java"></code-edit>
           </el-tab-pane>
-          <el-tab-pane label="mapper.xml" name="second">
-            <textarea style="width: 100%;min-height: 320px">{{mapper}}</textarea>
+          <el-tab-pane label="mapper.xml" name="second" :lazy=true>
+            <!--<textarea style="width: 100%;min-height: 320px">{{mapper}}</textarea>-->
+            <code-edit :code="mapper" imime="xml"></code-edit>
           </el-tab-pane>
-          <el-tab-pane label="controller" name="third">
-            <textarea style="width: 100%;min-height: 320px">{{controller}}</textarea>
+          <el-tab-pane label="controller" name="third" :lazy=true>
+            <code-edit :code="controller" imime="text/x-java"></code-edit>
           </el-tab-pane>
-          <el-tab-pane label="service" name="fourth">{{service}}</el-tab-pane>
+          <el-tab-pane label="service" name="fourth" :lazy=true>
+            <code-edit :code="service" imime="text/x-java"></code-edit>
+          </el-tab-pane>
+          <el-tab-pane label="sql" name="five">
+            <code-edit :code="service" imime="text/x-java"></code-edit>
+          </el-tab-pane>
         </el-tabs>
         <!--<span slot="footer" class="dialog-footer">-->
         <!--<el-button @click="dialogVisible = false">取 消</el-button>-->
         <!--<el-button type="primary" @click="dialogVisible = false">确 定</el-button>-->
         <!--</span>-->
-      </el-dialog>
+      </el-drawer>
       <cus-dialog
         :visible="previewVisible"
         @on-close="previewVisible = false"
@@ -115,11 +127,14 @@
         width="1000px"
         form
       >
-        <generate-form insite="true" @on-change="handleDataChange" v-if="previewVisible" :data="widgetForm" :value="widgetModels" :remote="remoteFuncs" ref="generateForm">
+        <generate-form insite="true" @on-change="handleDataChange" v-if="previewVisible" :data="widgetForm"
+                       :value="widgetModels" :remote="remoteFuncs" ref="generateForm">
 
           <template v-slot:blank="scope">
-            宽度：<el-input v-model="scope.model.blank.width" style="width: 100px"></el-input>
-            高度：<el-input v-model="scope.model.blank.height" style="width: 100px"></el-input>
+            宽度：
+            <el-input v-model="scope.model.blank.width" style="width: 100px"></el-input>
+            高度：
+            <el-input v-model="scope.model.blank.height" style="width: 100px"></el-input>
           </template>
         </generate-form>
 
@@ -129,13 +144,65 @@
         </template>
       </cus-dialog>
 
-      <el-dialog>
+      <el-dialog :visible.sync="backEndVisible" title="后端代码">
+        <el-form :model="widgetForm" :rules="rules" ref="widgetForm" label-width="100px" :inline=true>
+          <el-row>
+            <el-form-item label="包路径" prop="packagePath">
+              <el-input v-model="widgetForm.packagePath" placeholder="com.bootdo"></el-input>
+            </el-form-item>
+            <el-form-item label="对象名称" prop="name">
+              <el-input v-model="widgetForm.name" placeholder="demo"></el-input>
+            </el-form-item>
+          </el-row>
+          <el-row>
+
+          </el-row>
+          <el-row>
+            <el-form-item label="对象注释" prop="note">
+              <el-input v-model="widgetForm.note" placeholder="这是一个demo"></el-input>
+            </el-form-item>
+            <el-form-item label="作者" prop="author">
+              <el-input v-model="widgetForm.author" placeholder="lichunguang"></el-input>
+            </el-form-item>
+          </el-row>
+          <el-row>
+
+            <el-form-item label="持久层" prop="persistence">
+              <el-select v-model="widgetForm.persistence">
+                <el-option v-for="item in persistences">{{item}}</el-option>
+              </el-select>
+            </el-form-item>
+            <el-form-item label="使用lombok" prop="lombok">
+              <el-checkbox v-model="widgetForm.lombok"></el-checkbox>
+            </el-form-item>
+            <el-form-item label="添加swagger" prop="swagger">
+              <el-checkbox v-model="widgetForm.swagger"></el-checkbox>
+            </el-form-item>
+
+          </el-row>
+          <el-row>
+            <el-form-item label="数据库" prop="db">
+              <el-select v-model="widgetForm.db">
+                <el-option v-for="item in dbs">{{item}}</el-option>
+              </el-select>
+            </el-form-item>
+            <el-form-item label="DB表前缀" prop="tablePrefix">
+              <el-input v-model="widgetForm.tablePrefix">
+              </el-input>
+            </el-form-item>
+
+          </el-row>
+
+          <el-form-item>
+            <el-button type="primary" @click="doGenerate">生成代码</el-button>
+          </el-form-item>
+        </el-form>
 
       </el-dialog>
 
     </el-main>
-    <el-footer class="bd-footer" height="30px">Powered by <a target="_blank" href="http://bootdo.com">bootdo.com</a>
-    </el-footer>
+    <!--<el-footer class="bd-footer" height="30px">Powered by <a target="_blank" href="http://bootdo.com">bootdo.com</a>-->
+    <!--</el-footer>-->
   </el-container>
 </template>
 
@@ -166,6 +233,17 @@
     props: {},
     data() {
       return {
+        dbs: ['mysql', 'oracle'],
+        persistences: ['mybatis', 'jpa'],
+        rules: {
+          name: [
+            {required: true, message: '请输入对象名称', trigger: 'blur'},
+          ],
+          packagePath: [
+            {required: true, message: '请输入包路径', trigger: 'blur'},
+          ]
+        },
+        backEndVisible: false,
         widgetModels: {},
         previewVisible: false,
         activeName: 'first',
@@ -193,7 +271,13 @@
           labelPosition: 'right',
           size: 'small',
           name: '',
-          packagePath: ''
+          packagePath: '',
+          lombok: true,
+          swagger: true,
+          author: '',
+          db: 'mysql',
+          persistence: 'mybatis',
+          tablePrefix: 't_'
         },
         widgetFormSelect: null,
         dialogVisible: false
@@ -216,22 +300,30 @@
         this.drawer = true
       },
       handleGenerateBean() {
+        if(this.widgetForm.list.length<1){
+          this.$message('表单没有元素哦')
+          return
+        }
         let that = this
-        if (!this.widgetForm.name) {
-          this.$message('请先设置兑现名称');
-          return
-        }
-        if (!this.widgetForm.packagePath) {
-          this.$message('请先设置包路径');
-          return
-        }
-        ApiGenerator.addUser(this.widgetForm).then(function (res) {
-          that.bean = res.domain
-          that.mapper = res.Mapper
-          that.controller = res.Controller
-          that.dialogVisible = true
+        this.backEndVisible = true
+
+      },
+      doGenerate() {
+        let that = this
+        this.$refs['widgetForm'].validate((valid) => {
+          if (valid) {
+            ApiGenerator.addUser(that.widgetForm).then(function (res) {
+              that.bean = res.domain
+              that.mapper = res.Mapper
+              that.controller = res.Controller
+              that.dialogVisible = true
+            })
+          } else {
+            return false
+          }
         })
       },
+
       handleConfigSelect(value) {
         this.configTab = value
       },
@@ -244,10 +336,13 @@
       get() {
         let id = this.$route.query.id
         let that = this
-        ApiForm.get(id).then(function (res) {
-          that.widgetForm = res
-          that.widgetForm.list = []
-        })
+        if (id) {
+          ApiForm.get(id).then(function (res) {
+            that.widgetForm = res
+            that.widgetForm.list = []
+          })
+        }
+
       },
       createPreview() {
         this.previewVisible = true

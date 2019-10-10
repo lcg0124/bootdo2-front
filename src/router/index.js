@@ -12,7 +12,7 @@ export default new Router({
   routes: [
     {
       path:'/',
-      redirect:'/list'
+      redirect:'/edit'
     },
     {
       path: '/edit',
