@@ -15,8 +15,9 @@
         </el-row>
       </el-header>
       <el-container style="height: calc(100% - 40px)">
-        <el-aside width="200px">
-          <el-menu default-active="00001" background-color="#545c64" default-openeds="00001"
+        <el-aside width="200px" style="margin-top: 20px">
+          <el-menu default-active="00001" default-openeds="00001"
+                   background-color="#40485b"
                    text-color="#fff"
                    active-text-color="#ffd04b">
             <el-submenu index="00001">
@@ -53,7 +54,7 @@
         <el-main :class="{'widget-empty': widgetForm.list.length == 0}">
 
           <el-container
-            style=" border-left: 1px solid #e0e0e0; border-right: 1px solid #e0e0e0; height: 100% !important;">
+            style=" border: 1px solid #e0e0e0; height: 100% !important;">
 
             <el-main style=" padding: 0;
     position: relative;
@@ -69,11 +70,15 @@
         <el-aside width="280px">
           <el-container>
             <el-tabs v-model="activeName" style="width: 100%">
-              <el-tab-pane label="字段属性" name="first">
+              <el-tab-pane label="前端属性" name="first">
                 <widget-config v-show="configTab=='widget'" :data="widgetFormSelect"></widget-config>
               </el-tab-pane>
-              <el-tab-pane label="表单属性" name="second">
+              <el-tab-pane label="后端属性" name="3">
+                <span>后端和数据库属性，待完成</span>
+              </el-tab-pane>
+              <el-tab-pane label="对象属性" name="second">
                 <form-config :data="widgetForm"></form-config>
+
               </el-tab-pane>
             </el-tabs>
           </el-container>
@@ -97,22 +102,28 @@
         size="80%"
         :before-close="handleClose">
         <el-tabs v-model="activeName" @tab-click="handleClick" style="margin-left: 5px" :stretch=false>
-          <el-tab-pane label="bean" name="first">
+          <el-tab-pane label="Bean" name="first" :lazy=true>
             <!--<CodeEdit :mycode="bean"></CodeEdit>-->
-            <code-edit :code="bean" imime="text/x-java"></code-edit>
+            <code-edit :code="backEndData.domain" imime="text/x-java" ></code-edit>
           </el-tab-pane>
-          <el-tab-pane label="mapper.xml" name="second" :lazy=true>
+          <el-tab-pane label="Mapper.xml" name="second" :lazy=true>
             <!--<textarea style="width: 100%;min-height: 320px">{{mapper}}</textarea>-->
-            <code-edit :code="mapper" imime="xml"></code-edit>
+            <code-edit :code="backEndData.Mapper" imime="xml"></code-edit>
           </el-tab-pane>
-          <el-tab-pane label="controller" name="third" :lazy=true>
-            <code-edit :code="controller" imime="text/x-java"></code-edit>
+          <el-tab-pane label="Controller" name="third" :lazy=true>
+            <code-edit :code="backEndData.Controller" imime="text/x-java"></code-edit>
           </el-tab-pane>
-          <el-tab-pane label="service" name="fourth" :lazy=true>
-            <code-edit :code="service" imime="text/x-java"></code-edit>
+          <el-tab-pane label="Service" name="fourth" :lazy=true>
+            <code-edit :code="backEndData.Service" imime="text/x-java"></code-edit>
           </el-tab-pane>
-          <el-tab-pane label="sql" name="five">
-            <code-edit :code="service" imime="text/x-java"></code-edit>
+          <el-tab-pane label="ServiceImpl" name="5th" :lazy=true>
+            <code-edit :code="backEndData.ServiceImpl" imime="text/x-java"></code-edit>
+          </el-tab-pane>
+          <el-tab-pane label="Dao" name="6th" :lazy=true>
+            <code-edit :code="backEndData.Dao" imime="text/x-java"></code-edit>
+          </el-tab-pane>
+          <el-tab-pane label="sql" name="7th" :lazy=true>
+            <code-edit :code="backEndData.menu" imime="sql"></code-edit>
           </el-tab-pane>
         </el-tabs>
         <!--<span slot="footer" class="dialog-footer">-->
@@ -248,9 +259,7 @@
         previewVisible: false,
         activeName: 'first',
         bean: 'bean',
-        mapper: '',
-        service: '',
-        controller: '',
+        backEndData:{},
         configTab: 'widget',
         widgetFormSelect: null,
         htmlTemplate: '',
@@ -313,9 +322,7 @@
         this.$refs['widgetForm'].validate((valid) => {
           if (valid) {
             ApiGenerator.addUser(that.widgetForm).then(function (res) {
-              that.bean = res.domain
-              that.mapper = res.Mapper
-              that.controller = res.Controller
+              that.backEndData = res
               that.dialogVisible = true
             })
           } else {

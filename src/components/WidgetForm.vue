@@ -224,7 +224,7 @@ export default {
   .widget-form-container .widget-form-list {
     background: #fff;
     border: 1px dashed #999;
-    min-height: 600px;
+    min-height: 500px;
     margin: 10px;
   }
   .widget-form-container .widget-form-list .widget-col-list {
