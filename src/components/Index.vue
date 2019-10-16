@@ -15,19 +15,16 @@
         </el-row>
       </el-header>
       <el-container style="height: calc(100% - 40px)">
-        <el-aside width="200px" style="margin-top: 20px">
-          <el-menu default-active="00001" default-openeds="00001"
-                   background-color="#40485b"
-                   text-color="#fff"
-                   active-text-color="#ffd04b">
+        <el-aside width="230px" style="margin-top: 20px">
+          <el-menu default-openeds="00001"
+                  >
             <el-submenu index="00001">
               <template slot="title">
-                <i class="el-icon-location"></i>
                 <span>FORM表单</span>
               </template>
               <Draggable tag="ul" :list="basicComponents" class="vp-widgetList"
                          v-bind="{group:{ name:'people', pull:'clone',put:false},sort:false, ghostClass: 'ghost'}">
-                <el-menu-item v-for="(item, index) in basicComponents" :key="index">
+                <el-menu-item v-for="(item, index) in basicComponents" :key="index" style="cursor: move">
                   <i class="icon iconfont" :class="item.icon"></i>
                   <span>{{item.name}}</span>
                 </el-menu-item>
@@ -497,6 +494,22 @@
   .themeDark .vp-widgetTitle {
     color: #ffffe6;
   }
+
+  /*.el-submenu .el-menu-item {*/
+    /*height: 35px;*/
+    /*line-height: 35px;*/
+    /*padding: 0 45px;*/
+    /*!*min-width: 200px;*!*/
+  /*}*/
+
+  /*.el-menu-item, .el-submenu__title {*/
+    /*height: 35px;*/
+    /*line-height: 35px;*/
+    /*position: relative;*/
+    /*-webkit-box-sizing: border-box;*/
+    /*white-space: nowrap;*/
+    /*list-style: none;*/
+  /*}*/
 </style>
 
 
