@@ -150,7 +150,6 @@
 
   .bd-container {
     height: calc(100% - 50px);
-    background-color: rgb(250, 250, 250);
   }
 
 
