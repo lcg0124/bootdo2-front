@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="">
     <div class="bd-header">
-      <img class="bd-logo" src="./assets/logo.png">
+      <img class="bd-logo" src="./assets/favicon.png">
       <div class="bd-title" @click="handleHome">可视化编程工具</div>
 
       <div class="bd-link">
@@ -31,7 +31,7 @@
 <style>
   /*default theme*/
   .bd-header {
-    height: 50px;
+    height: 20px;
     /*box-shadow: 0 2px 10px rgba(70, 160, 252, 0.6);*/
     padding: 0 40px;
     /*background: #40485b;;*/

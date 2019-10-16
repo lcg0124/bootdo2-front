@@ -4,8 +4,18 @@
       <el-form-item label="name">
         <el-input v-model="data.model"></el-input>
       </el-form-item>
-      <el-form-item label="标题" v-if="data.type!='grid'">
+      <el-form-item label="标题注释" v-if="data.type!='grid'">
         <el-input v-model="data.name"></el-input>
+      </el-form-item>
+      <el-form-item label="java类型" v-if="data.type!='grid'">
+        <el-select v-model="data.javaType">
+          <el-option>String</el-option>
+        </el-select>
+      </el-form-item>
+      <el-form-item label="DB类型" v-if="data.type!='grid'">
+        <el-select v-model="data.dbType">
+          <el-option>varchar</el-option>
+        </el-select>
       </el-form-item>
       <el-form-item label="宽度" v-if="Object.keys(data.options).indexOf('width')>=0">
         <el-input v-model="data.options.width"></el-input>

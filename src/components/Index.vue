@@ -16,37 +16,21 @@
       </el-header>
       <el-container style="height: calc(100% - 40px)">
         <el-aside width="230px" style="margin-top: 20px">
-          <el-menu default-openeds="00001"
-                  >
+          <el-menu :default-openeds="defaultOpeneds" >
             <el-submenu index="00001">
               <template slot="title">
-                <span>FORM表单</span>
+                <span >FORM表单</span>
               </template>
               <Draggable tag="ul" :list="basicComponents" class="vp-widgetList"
                          v-bind="{group:{ name:'people', pull:'clone',put:false},sort:false, ghostClass: 'ghost'}">
                 <el-menu-item v-for="(item, index) in basicComponents" :key="index" style="cursor: move">
                   <i class="icon iconfont" :class="item.icon"></i>
-                  <span>{{item.name}}</span>
+                  <span >{{item.name}}</span>
                 </el-menu-item>
               </Draggable>
             </el-submenu>
           </el-menu>
-          <!--<el-collapse accordion>-->
-          <!--<el-collapse-item>-->
-          <!--<template slot="title">-->
-          <!--<div class="vp-widgetTitle">基础表单容器</div>-->
-          <!--</template>-->
-          <!--<Draggable tag="ul" :list="basicComponents" class="vp-widgetList"-->
-          <!--v-bind="{group:{ name:'people', pull:'clone',put:false},sort:false, ghostClass: 'ghost'}">-->
-          <!--<li class="form-edit-widget-label" v-for="(item, index) in basicComponents" :key="index">-->
-          <!--<a>-->
-          <!--<i class="icon iconfont" :class="item.icon"></i>-->
-          <!--<span>{{item.name}}</span>-->
-          <!--</a>-->
-          <!--</li>-->
-          <!--</Draggable>-->
-          <!--</el-collapse-item>-->
-          <!--</el-collapse>-->
+
         </el-aside>
         <el-main :class="{'widget-empty': widgetForm.list.length == 0}">
 
@@ -67,11 +51,8 @@
         <el-aside width="280px">
           <el-container>
             <el-tabs v-model="activeName" style="width: 100%">
-              <el-tab-pane label="前端属性" name="first">
+              <el-tab-pane label="字段属性" name="first">
                 <widget-config v-show="configTab=='widget'" :data="widgetFormSelect"></widget-config>
-              </el-tab-pane>
-              <el-tab-pane label="后端属性" name="3">
-                <span>后端和数据库属性，待完成</span>
               </el-tab-pane>
               <el-tab-pane label="对象属性" name="second">
                 <form-config :data="widgetForm"></form-config>
@@ -241,6 +222,7 @@
     props: {},
     data() {
       return {
+        defaultOpeneds:['00001'],
         dbs: ['mysql', 'oracle'],
         persistences: ['mybatis', 'jpa'],
         rules: {

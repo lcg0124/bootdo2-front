@@ -2,6 +2,8 @@ export const basicComponents = [
   {
     type: 'input',
     name: '单行文本',
+    javaType: 'String',
+    dbType: 'varchar',
     icon: 'icon-input',
     options: {
       width: '100%',
@@ -188,7 +190,7 @@ export const basicComponents = [
         },
         {
           value: '选项一'
-        },{
+        }, {
           value: '选项一'
         }
       ],
