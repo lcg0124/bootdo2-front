@@ -2,7 +2,7 @@
   <div id="app" class="">
     <div class="bd-header">
       <img class="bd-logo" src="./assets/favicon.png">
-      <div class="bd-title" @click="handleHome">可视化编程工具</div>
+      <div class="bd-title" @click="handleHome">BootDo2.0可视化编程工具</div>
 
       <div class="bd-link">
 
@@ -33,7 +33,7 @@
   .bd-header {
     height: 20px;
     /*box-shadow: 0 2px 10px rgba(70, 160, 252, 0.6);*/
-    padding: 0 40px;
+    padding: 0 60px;
     /*background: #40485b;;*/
     position: relative;
   }
@@ -152,7 +152,6 @@
     height: calc(100% - 50px);
   }
 
-
   .el-row {
     margin-bottom: 20px;
   }
@@ -191,6 +190,15 @@
     font-weight: bold;
   }
 
+  ::-webkit-scrollbar {
+    width: 3px;
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: #a1a3a9;
+    border-radius: 3px;
+  }
 
 
 </style>

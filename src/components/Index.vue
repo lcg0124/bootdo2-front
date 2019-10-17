@@ -3,11 +3,11 @@
     <el-main style="position: relative; padding-top:0px">
       <el-header class="btn-bar" style="height: 40px;">
         <el-row>
-          <el-button type="text" size="medium" icon="el-icon-back" style="text-align: left" @click="goList"
-                     disabled="disabled">返回对象列表
-          </el-button>
-          <el-button type="text" size="medium" icon="el-icon-document" @click="saveForm" disabled="disabled">保存
-          </el-button>
+          <!--<el-button type="text" size="medium" icon="el-icon-back" style="text-align: left" @click="goList"-->
+                     <!--disabled="disabled">返回对象列表-->
+          <!--</el-button>-->
+          <!--<el-button type="text" size="medium" icon="el-icon-document" @click="saveForm" disabled="disabled">保存-->
+          <!--</el-button>-->
           <el-button type="text" size="medium" icon="el-icon-delete">清空</el-button>
           <el-button type="text" size="medium" icon="el-icon-view" @click="createPreview">预览</el-button>
           <el-button type="text" size="medium" icon="el-icon-tickets" @click="handleGenerateBean">后端代码</el-button>
@@ -15,9 +15,11 @@
         </el-row>
       </el-header>
       <el-container style="height: calc(100% - 40px)">
-        <el-aside width="230px" style="margin-top: 20px">
-          <el-menu :default-openeds="defaultOpeneds">
-            <el-submenu index="00001">
+        <el-aside width="230px" >
+          <el-menu :default-openeds="defaultOpeneds"  background-color="#545c64"
+                   text-color="#fff"
+                   active-text-color="#ffd04b">
+            <el-submenu index="00001" >
               <template slot="title">
                 <span>FORM表单</span>
               </template>
