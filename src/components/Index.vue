@@ -16,16 +16,16 @@
       </el-header>
       <el-container style="height: calc(100% - 40px)">
         <el-aside width="230px" style="margin-top: 20px">
-          <el-menu :default-openeds="defaultOpeneds" >
+          <el-menu :default-openeds="defaultOpeneds">
             <el-submenu index="00001">
               <template slot="title">
-                <span >FORM表单</span>
+                <span>FORM表单</span>
               </template>
               <Draggable tag="ul" :list="basicComponents" class="vp-widgetList"
                          v-bind="{group:{ name:'people', pull:'clone',put:false},sort:false, ghostClass: 'ghost'}">
                 <el-menu-item v-for="(item, index) in basicComponents" :key="index" style="cursor: move">
                   <i class="icon iconfont" :class="item.icon"></i>
-                  <span >{{item.name}}</span>
+                  <span>{{item.name}}</span>
                 </el-menu-item>
               </Draggable>
             </el-submenu>
@@ -82,7 +82,7 @@
         <el-tabs v-model="activeName" @tab-click="handleClick" style="margin-left: 5px" :stretch=false>
           <el-tab-pane label="Bean" name="first" :lazy=true>
             <!--<CodeEdit :mycode="bean"></CodeEdit>-->
-            <code-edit :code="backEndData.domain" imime="text/x-java" ></code-edit>
+            <code-edit :code="backEndData.domain" imime="text/x-java"></code-edit>
           </el-tab-pane>
           <el-tab-pane label="Mapper.xml" name="second" :lazy=true>
             <!--<textarea style="width: 100%;min-height: 320px">{{mapper}}</textarea>-->
@@ -162,7 +162,7 @@
               </el-select>
             </el-form-item>
             <el-form-item label="使用lombok" prop="lombok">
-              <el-checkbox v-model="widgetForm.lombok"></el-checkbox>
+              <el-checkbox v-model="widgetForm.useLombok"></el-checkbox>
             </el-form-item>
             <el-form-item label="添加swagger" prop="swagger">
               <el-checkbox v-model="widgetForm.swagger"></el-checkbox>
@@ -222,7 +222,7 @@
     props: {},
     data() {
       return {
-        defaultOpeneds:['00001'],
+        defaultOpeneds: ['00001'],
         dbs: ['mysql', 'oracle'],
         persistences: ['mybatis', 'jpa'],
         rules: {
@@ -238,7 +238,7 @@
         previewVisible: false,
         activeName: 'first',
         bean: 'bean',
-        backEndData:{},
+        backEndData: {},
         configTab: 'widget',
         widgetFormSelect: null,
         htmlTemplate: '',
@@ -265,7 +265,8 @@
           author: '',
           db: 'mysql',
           persistence: 'mybatis',
-          tablePrefix: 't_'
+          tablePrefix: 't_',
+          useLombok: true
         },
         widgetFormSelect: null,
         dialogVisible: false
@@ -288,7 +289,7 @@
         this.drawer = true
       },
       handleGenerateBean() {
-        if(this.widgetForm.list.length<1){
+        if (this.widgetForm.list.length < 1) {
           this.$message('表单没有元素哦')
           return
         }
@@ -478,19 +479,19 @@
   }
 
   /*.el-submenu .el-menu-item {*/
-    /*height: 35px;*/
-    /*line-height: 35px;*/
-    /*padding: 0 45px;*/
-    /*!*min-width: 200px;*!*/
+  /*height: 35px;*/
+  /*line-height: 35px;*/
+  /*padding: 0 45px;*/
+  /*!*min-width: 200px;*!*/
   /*}*/
 
   /*.el-menu-item, .el-submenu__title {*/
-    /*height: 35px;*/
-    /*line-height: 35px;*/
-    /*position: relative;*/
-    /*-webkit-box-sizing: border-box;*/
-    /*white-space: nowrap;*/
-    /*list-style: none;*/
+  /*height: 35px;*/
+  /*line-height: 35px;*/
+  /*position: relative;*/
+  /*-webkit-box-sizing: border-box;*/
+  /*white-space: nowrap;*/
+  /*list-style: none;*/
   /*}*/
 </style>
 
