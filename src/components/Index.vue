@@ -35,11 +35,10 @@
         <el-main :class="{'widget-empty': widgetForm.list.length == 0}">
 
           <el-container
-            style=" border: 1px solid #e0e0e0; height: 100% !important;">
+            style=" height: 100% !important;">
 
             <el-main style=" padding: 0;
-    position: relative;
-    background: #fafafa; height: 100%">
+    position: relative;height: 100%">
               <widget-form v-if="!resetJson" ref="widgetForm" :data="widgetForm"
                            :select.sync="widgetFormSelect" style="height: 100%"></widget-form>
             </el-main>
