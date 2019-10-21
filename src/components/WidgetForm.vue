@@ -1,5 +1,6 @@
 <template>
   <div class="widget-form-container" style="height: 100%">
+    <div v-if="data.list<1" style="position: absolute;width: 40%; height: 30px;color: #909399;">布局区（拖动右侧的组件到这里）</div>
     <div v-if="data.list.length == 0" class="form-empty"></div>
     <el-form :size="data.size" label-suffix=":" :label-position="data.labelPosition" :label-width="data.labelWidth + 'px'">
 
@@ -222,8 +223,8 @@ export default {
     bottom: 0;
   }
   .widget-form-container .widget-form-list {
-    background: #fff;
-    border: 1px dashed #999;
+    background: transparent;
+    /*border: 1px dashed #999;*/
     min-height: 500px;
     /*margin: 10px;*/
   }

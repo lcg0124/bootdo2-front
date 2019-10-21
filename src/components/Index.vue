@@ -1,26 +1,12 @@
 <template>
   <el-container style="height: 100%">
-    <el-main style="position: relative; padding-top:0px">
-      <el-header class="btn-bar" style="height: 40px;">
-        <el-row>
-          <!--<el-button type="text" size="medium" icon="el-icon-back" style="text-align: left" @click="goList"-->
-                     <!--disabled="disabled">返回对象列表-->
-          <!--</el-button>-->
-          <!--<el-button type="text" size="medium" icon="el-icon-document" @click="saveForm" disabled="disabled">保存-->
-          <!--</el-button>-->
-          <el-button type="text" size="medium" icon="el-icon-delete">清空</el-button>
-          <el-button type="text" size="medium" icon="el-icon-view" @click="createPreview">预览</el-button>
-          <el-button type="text" size="medium" icon="el-icon-tickets" @click="handleGenerateBean">后端代码</el-button>
-          <el-button type="text" size="medium" icon="el-icon-document" @click="handleGenerateCode">前端代码</el-button>
-        </el-row>
-      </el-header>
-      <el-container style="height: calc(100% - 40px)">
-        <el-aside width="230px" >
-          <el-menu :default-openeds="defaultOpeneds"  background-color="#545c64"
-                   text-color="#fff"
-                   active-text-color="#ffd04b">
-            <el-submenu index="00001" >
+    <el-main >
+      <el-container style="height:100%">
+        <el-aside width="230px">
+          <el-menu :default-openeds="defaultOpeneds" background-color="#F8F9FA">
+            <el-submenu index="00001">
               <template slot="title">
+                <i class="el-icon-menu"></i>
                 <span>FORM表单</span>
               </template>
               <Draggable tag="ul" :list="basicComponents" class="vp-widgetList"
@@ -32,36 +18,44 @@
               </Draggable>
             </el-submenu>
           </el-menu>
-
         </el-aside>
-        <el-main :class="{'widget-empty': widgetForm.list.length == 0}">
+        <el-container>
+          <el-header>
+            <div class="i-row" style="text-align: right">
+              <!--<el-button type="text" size="medium" icon="el-icon-back" style="text-align: left" @click="goList"-->
+              <!--disabled="disabled">返回对象列表-->
+              <!--</el-button>-->
+              <!--<el-button type="text" size="medium" icon="el-icon-document" @click="saveForm" disabled="disabled">保存-->
+              <!--</el-button>-->
+              <el-button type="text" size="medium" icon="el-icon-delete">清空</el-button>
+              <el-button type="text" size="medium" icon="el-icon-view" @click="createPreview">预览</el-button>
+              <el-button type="text" size="medium" icon="el-icon-tickets" @click="handleGenerateBean">后端代码</el-button>
+              <el-button type="text" size="medium" icon="el-icon-document" @click="handleGenerateCode">前端代码</el-button>
+            </div>
+          </el-header>
+          <el-main>
+            <el-container style="height: 100%">
+              <el-main :class="{'widget-empty': widgetForm.list.length == 0}" style=" position: relative;height: 100%;background: #fff">
 
-          <el-container
-            style=" height: 100% !important;">
+                <widget-form v-if="!resetJson" ref="widgetForm" :data="widgetForm"
+                             :select.sync="widgetFormSelect"></widget-form>
+              </el-main>
+              <el-aside width="280px">
+                <div class="i-row" style="height: 100%; margin-left: 10px">
+                  <el-tabs v-model="activeName">
+                    <el-tab-pane label="字段属性" name="first">
+                      <widget-config v-show="configTab=='widget'" :data="widgetFormSelect"></widget-config>
+                    </el-tab-pane>
+                    <el-tab-pane label="对象属性" name="second">
+                      <form-config :data="widgetForm"></form-config>
 
-            <el-main style=" padding: 0;
-    position: relative;height: 100%">
-              <widget-form v-if="!resetJson" ref="widgetForm" :data="widgetForm"
-                           :select.sync="widgetFormSelect" style="height: 100%"></widget-form>
-            </el-main>
-
-          </el-container>
-
-        </el-main>
-
-        <el-aside width="280px">
-          <el-container>
-            <el-tabs v-model="activeName" style="width: 100%">
-              <el-tab-pane label="字段属性" name="first">
-                <widget-config v-show="configTab=='widget'" :data="widgetFormSelect"></widget-config>
-              </el-tab-pane>
-              <el-tab-pane label="对象属性" name="second">
-                <form-config :data="widgetForm"></form-config>
-
-              </el-tab-pane>
-            </el-tabs>
-          </el-container>
-        </el-aside>
+                    </el-tab-pane>
+                  </el-tabs>
+                </div>
+              </el-aside>
+            </el-container>
+          </el-main>
+        </el-container>
       </el-container>
       <el-drawer style="margin-left: 5px"
                  title="前端代码"
@@ -180,6 +174,14 @@
               <el-input v-model="widgetForm.tablePrefix">
               </el-input>
             </el-form-item>
+            <el-form-item label="DB主键" prop="pk">
+              <el-input v-model="widgetForm.pk">
+              </el-input>
+            </el-form-item>
+            <el-form-item label="主键类型" prop="pkType">
+              <el-input v-model="widgetForm.pkType">
+              </el-input>
+            </el-form-item>
 
           </el-row>
 
@@ -267,7 +269,9 @@
           db: 'mysql',
           persistence: 'mybatis',
           tablePrefix: 't_',
-          useLombok: true
+          useLombok: true,
+          pk: 'id',
+          pkType: 'varchar'
         },
         widgetFormSelect: null,
         dialogVisible: false
@@ -478,6 +482,11 @@
   .themeDark .vp-widgetTitle {
     color: #ffffe6;
   }
+
+  /*.widget-empty{*/
+    /*background: url('../assets/back.jpg') no-repeat !important;*/
+    /*background-position: 50%;*/
+  /*}*/
 
   /*.el-submenu .el-menu-item {*/
   /*height: 35px;*/

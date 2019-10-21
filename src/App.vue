@@ -1,11 +1,10 @@
 <template>
-  <div id="app" class="">
+  <div id="app" class="bd-app">
     <div class="bd-header">
-      <img class="bd-logo" src="./assets/favicon.png">
-      <div class="bd-title" @click="handleHome">BootDo2.0可视化编程工具</div>
-
+      <!--<img class="bd-logo" src="./assets/favicon.png">-->
+      <i class="el-icon-s-data"></i>
+      <div class="bd-title " @click="handleHome">BootDo2.0可视化编程工具</div>
       <div class="bd-link">
-
       </div>
     </div>
     <div class="bd-container">
@@ -30,12 +29,17 @@
 
 <style>
   /*default theme*/
+  .bd-app {
+    background-color: #E7EAED;
+  }
+
   .bd-header {
-    height: 20px;
-    /*box-shadow: 0 2px 10px rgba(70, 160, 252, 0.6);*/
-    padding: 0 60px;
-    /*background: #40485b;;*/
+    height: 50px;
+    box-shadow: 0 2px 10px #E7EAED;
+    padding: 0 20px;
+    background: #ffffff;
     position: relative;
+    margin: 0 0px 0px 0px;
   }
 
   .bd-header .bd-logo {
@@ -45,7 +49,7 @@
 
   .bd-header .bd-title {
     display: inline-block;
-    line-height: 50px;
+    line-height: 30px;
     vertical-align: middle;
     /*color: #fff;*/
     font-size: 20px;
@@ -53,6 +57,7 @@
     opacity: 0.8;
     margin-left: 6px;
     cursor: pointer;
+    padding: 10px 0 10px 0;
   }
 
   .bd-header .bd-link {
@@ -61,7 +66,7 @@
   }
 
   .bd-header .bd-link a {
-    color: #fff;
+    /*color: #fff;*/
     text-decoration: none;
     font-size: 14px;
     line-height: 50px;
@@ -188,6 +193,19 @@
 
   i-title {
     font-weight: bold;
+  }
+
+  .i-row {
+    background-color: #fff;
+    padding: 10px;
+  }
+
+  .el-main {
+    padding: 10px !important;
+  }
+
+  .el-header {
+    padding: 0 10px !important;
   }
 
   ::-webkit-scrollbar {
