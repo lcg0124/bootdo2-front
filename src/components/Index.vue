@@ -7,6 +7,19 @@
             <el-submenu index="00001">
               <template slot="title">
                 <i class="el-icon-menu"></i>
+                <span>布局</span>
+              </template>
+              <Draggable tag="ul" :list="layoutComponents" class="vp-widgetList"
+                         v-bind="{group:{ name:'people', pull:'clone',put:false},sort:false, ghostClass: 'ghost'}">
+                <el-menu-item v-for="(item, index) in layoutComponents" :key="index" style="cursor: move">
+                  <i class="icon iconfont" :class="item.icon"></i>
+                  <span>{{item.name}}</span>
+                </el-menu-item>
+              </Draggable>
+            </el-submenu>
+            <el-submenu index="00002">
+              <template slot="title">
+                <i class="el-icon-menu"></i>
                 <span>FORM表单</span>
               </template>
               <Draggable tag="ul" :list="basicComponents" class="vp-widgetList"
@@ -17,6 +30,7 @@
                 </el-menu-item>
               </Draggable>
             </el-submenu>
+
           </el-menu>
         </el-aside>
         <el-container>
@@ -225,7 +239,7 @@
     props: {},
     data() {
       return {
-        defaultOpeneds: ['00001'],
+        defaultOpeneds: ['00001','00002'],
         dbs: ['mysql', 'oracle'],
         persistences: ['mybatis', 'jpa'],
         rules: {

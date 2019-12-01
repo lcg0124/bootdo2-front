@@ -192,7 +192,7 @@
         </div>
 
         <div class="widget-view-drag" v-if="selectWidget.key == element.key">
-          <i class="iconfont icon-drag drag-widget"></i>
+          <i class="fa fa fa-arrows  icon-drag drag-widget"></i>
         </div>
 
     </el-form-item>

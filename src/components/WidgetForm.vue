@@ -46,11 +46,11 @@
                   </el-col>
                   <div class="widget-view-action widget-col-action" v-if="selectWidget.key == element.key">
 
-                    <i class="iconfont icon-trash" @click.stop="handleWidgetDelete(index)"></i>
+                    <i class="el-icon-delete" @click.stop="handleWidgetDelete(index)"></i>
                   </div>
 
                   <div class="widget-view-drag widget-col-drag" v-if="selectWidget.key == element.key">
-                    <i class="iconfont icon-drag drag-widget"></i>
+                    <i class="fa fa-arrows icon-drag drag-widget"></i>
                   </div>
                 </el-row>
             </template>
